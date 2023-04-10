@@ -7,10 +7,10 @@ import Contacts from './comps/ContactComponent/Contact';
 function App() {
   return (
     <>
-      <Navbar></Navbar>
-      <Home></Home>
-      <Service></Service>
-      <Contacts></Contacts>
+      <Navbar />
+      <Home />
+      <Service />
+      <Contacts />
     </>
   );
 }

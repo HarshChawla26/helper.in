@@ -9,9 +9,9 @@ export default function Navbar()
              HELPER
           </div>
           <ul class="navbar-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/">About</a></li>
+            <li><a href="/">Contact</a></li>
           </ul>
     </nav>
   )

@@ -1,111 +1,40 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './results.css'
+import ResultCard from '../ResultCardComponent/ResultCard'
+import resultcontext from '../../context/resultContext/resultcontext'
 export default function Results() {
+    const [payload, setpayload] = useState([])
+    // eslint-disable-next-line
+    const [location, setlocation] = useState(sessionStorage.getItem('location'))
+    const result = useContext(resultcontext)
+    useEffect(() => {
+        setlocation(sessionStorage.getItem('location'))
+        // eslint-disable-next-line
+    }, [sessionStorage.getItem('location')])
+    
+    
+    useEffect(()=>{
+        if(result.data.length===0){
+            setpayload(JSON.parse(sessionStorage.getItem('data')))
+        }else{
+            setpayload(result.data)
+        }
+    }, [result.data])
 
   return (
-    <div>
-        <div class="BOX">
-            <div class="box1">
-                <h2 class="user">User 1</h2>
-                    <div class="desc">
-                        Name: John <br/>
-                        Charges: 0.00$ <br/>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ipsum quo sapiente officia blanditiis vitae iusto, dolor aspernatur libero</p>
-                    </div>
-                <div class="innerbox">
-                </div>
-            </div>
-            <div class="box2">
-                <h2 class="user">User 2</h2>
-                    <div class="desc">
-                        Name: Steve <br />
-                        Charges: 0.00$ <br/> 
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ipsum quo sapiente officia blanditiis vitae iusto, dolor aspernatur libero</p>
-                    </div>
-                <div class="innerbox">
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="BOX">
-            <div class="box1">
-                <h2 class="user">User 3</h2>
-                    <div class="desc">
-                        Name: Brook <br/>
-                        Charges: 0.00$ <br/>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ipsum quo sapiente officia blanditiis vitae iusto, dolor aspernatur libero</p>
-                    </div>
-                <div class="innerbox">
-                </div>
-            </div>
-            <div class="box2">
-                <h2 class="user">User 4</h2>
-                    <div class="desc">
-                        Name: Luffy <br/>
-                        Charges: 0.00$ <br/>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ipsum quo sapiente officia blanditiis vitae iusto, dolor aspernatur libero</p>
-                    </div>
-                <div class="innerbox">
-                </div>
-            </div>
-        </div>
-        
-        
-
-        <div class="BOX">
-            <div class="box1">
-                <h2 class="user">User 5</h2>
-                    <div class="desc">
-                        Name: Zoro <br/>
-                        Charges: 0.00$ <br/>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ipsum quo sapiente officia blanditiis vitae iusto, dolor aspernatur libero</p>
-                    </div>
-                <div class="innerbox">
-                </div>
-            </div>
-            <div class="box2">
-                <h2 class="user">User 6</h2>
-                    <div class="desc">
-                        Name: Sanji <br/>
-                        Charges: 0.00$ <br/>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaqe ipsum quo sapiente officia blanditiis vitae iusto, dolor aspernatur libero</p>
-                    </div>
-                <div class="innerbox">
-                </div>
-            </div>
-        </div>
-        
-        
-
-        <div class="BOX">
-            <div class="box1">
-                <h2 class="user">User 7</h2>
-                    <div class="desc">
-                        Name: Charlotte <br></br>
-                        Charges: 0.00$ <br/>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ipsum quo sapiente officia blanditiis vitae iusto, dolor aspernatur libero</p>
-                    </div>
-                <div class="innerbox">
-                </div> 
-            </div>
-            <div class="box2">
-                <h2 class="user">User 8</h2>
-                    <div class="desc">
-                        Name: Victoria<br/>
-                        Charges: 0.00$ <br/>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ipsum quo sapiente officia blanditiis vitae iusto, dolor aspernatur libero</p>
-                    </div>
-                <div class="innerbox">
-                </div>
-            </div>
+    <div className='wrapper'>
+        <div className="BOX">
+            {payload&&
+                payload.map(e=>{
+                    return <ResultCard key={e._id} name={e.name} desc={e.description} price={e.price} source={'/'} />
+                })
+            }
         </div>
         <div id="next">
-            <input type="image" src="next.png" height="50px" width="100px"></input>
+            <button>Next</button>
         </div>
         <div id="previous">
-            <input type="image" src="previousbutton.png" height="50px" width="100px"></input>
+            <button>Next</button>
         </div>  
     </div>
 

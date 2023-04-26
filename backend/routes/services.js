@@ -7,6 +7,22 @@ router.get('/',(req,res)=>{
     res.json('service API')
 })
 
+router.get('/:city',async (req,res)=>{
+    const {city} = req.params;
+    let services =  await serviceDB.find();
+    services = await services.map(e=>{
+        const f = e.areas.map(el=>{
+            return el.toLowerCase();
+        })
+        e.areas = f;
+        return e;
+    });
+    const fil = await services.filter(e=>{
+        if(e.areas.includes(city)) return true;
+        return false;
+    })
+    res.send(fil);
+})
 router.post('/data',async(req,res)=>{
     const {name,type,description,price,areas,tags,execID} = req.body;
     const service = new serviceDB({name,type,description,price,areas,tags,execID});

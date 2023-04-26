@@ -10,7 +10,7 @@ import Auth from "./comps/Auth/Auth";
 function App() {
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <Routes>
         <Route
           path="/"
@@ -18,10 +18,11 @@ function App() {
             <>
               <Home />
               <Service />
+              <Contacts />
             </>
           }
         />
-        <Route path="/results" element={<Results />} />
+        <Route path='/results' element={<><Results/><Contacts /></>}></Route>
         <Route path="/auth/*" element={<Auth />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

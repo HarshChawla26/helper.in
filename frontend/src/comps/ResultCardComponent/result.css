@@ -1,0 +1,49 @@
+
+.box1{
+    border:3px solid black;
+    height: 192px;
+    width: 382px;
+    margin: 20px 100px 20px 155px;
+    background-color: rgb(43, 144, 226);
+    border-radius: 15px;
+}
+
+.box2{
+    border:3px solid black;
+    height: 192px;
+    width: 382px;
+    margin: 20px 0px 20px 70px;
+    background-color: rgb(43, 144, 226);
+    border-radius: 15px;
+}
+
+.innerbox{
+    border: 3px solid black;
+    height: 80%;
+    width: 35%;
+    margin: 15px 0px 20px 15px;
+    border-radius: 15px;
+    background-color: whitesmoke;
+}
+.desc{
+    float: left;
+    margin: -8px 0px 0px 180px;
+    color: purple;
+}
+p{
+    text-align:left;
+    margin-top: 1px;
+    font-size: 90%;
+}
+#next{
+    float: right;
+}
+#previous{
+    float: left;
+}
+.user{
+    float: right;
+    margin-right: 90px;
+    color: whitesmoke;
+
+}

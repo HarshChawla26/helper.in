@@ -4,18 +4,19 @@ const app = express();
 const router = express.Router();
 
 const auth = require('./routes/auth')
-const user = require('./routes/users')
+
+const service = require('./routes/services');
 const cors = require('cors')
-const userDB = require('./models/user')
 
 app.use(cors())
 app.use(express.json())
 
-const db = require('./db')
+const db = require('./db');
 const PORT = 4000;
 
-app.use('/user',user)
-// app.use('/auth',auth);
+
+app.use('/auth',auth);
+app.use('/services',service)
 
 
 app.get('/',(req,res)=>{

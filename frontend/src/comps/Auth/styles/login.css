@@ -1,0 +1,43 @@
+/* Login Container */
+.login-container{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+form{
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+form input[type="email"],form input[type="password"] {
+    width: 100%;
+    outline: none;
+    border-radius: 50px;
+    font-size: 16px;
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+form div{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+form p {
+    position: absolute;
+    left: 15px;
+    top: -9px;
+    font-size: 11px;
+    padding: 1px 8px;
+    background-color: white;
+}
+
+form label {
+    font-size: 13px;
+    padding: 0 10px 2px 10px;
+    color: gray;
+}

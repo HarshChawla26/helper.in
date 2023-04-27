@@ -4,8 +4,8 @@ export default function Contact() {
   return (
     <div>
  
-        <div class="container1">
-            <div class="form">
+        <div className="container1">
+            <div className="form">
               <h2>Contact Us</h2>
                 <form>
                   <input type="text" name="name" placeholder="Your Name" required></input>
@@ -14,11 +14,11 @@ export default function Contact() {
                   <button type="submit">Send Message</button>
                 </form>
             
-            <div class="contact-info">
+            <div className="contact-info">
               <h2>Contact Information</h2>
-              <p><i class="fas fa-map-marker-alt"></i>123 Main St, Anytown, USA</p>
-              <p><i class="fas fa-envelope"></i>info@example.com</p>
-              <p><i class="fas fa-phone"></i>(123) 456-7890</p>
+              <p><i className="fas fa-map-marker-alt"></i>123 Main St, Anytown, USA</p>
+              <p><i className="fas fa-envelope"></i>info@example.com</p>
+              <p><i className="fas fa-phone"></i>(123) 456-7890</p>
             </div>
           </div>
           </div> 

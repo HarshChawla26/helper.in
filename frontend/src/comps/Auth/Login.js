@@ -1,8 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./styles/login.css";
+import AuthContext from "../../context/AuthContext/authContext";
 
 export default function Login() {
+  const navigator = useNavigate();
+  const [formData, setformData] = useState({
+    email:'',
+    pwd:''
+  })
+  const userState = useContext(AuthContext)
+  function handleinput(e){
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setformData(val=>({...val,[name]:value}))
+  }
+  async function handleLogin(e){
+    e.preventDefault()
+    await userState.userLogin(formData);
+    await navigator('/')
+  }
+  // useEffect(() => {
+  //   console.log(formData)
+  // }, [formData])
+  
   return (
     <div className="login-container">
       <div>
@@ -13,11 +35,11 @@ export default function Login() {
       <form>
         <div>
           <p> Enter Email </p>
-          <input type="email" name="email" />
+          <input onChange={handleinput} type="email" name="email" />
         </div>
         <div>
           <p> Enter Password </p>
-          <input type="password" name="pass" />
+          <input type="password" onChange={handleinput}  name="pwd" />
         </div>
         <div>
           <input
@@ -30,7 +52,7 @@ export default function Login() {
         </div>
 
         <div>
-          <button>SIGN IN</button>
+          <button onClick={handleLogin}>SIGN IN</button>
         </div>
       </form>
 

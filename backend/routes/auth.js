@@ -3,14 +3,16 @@ const router = express.Router();
 const userDB = require('../models/user')
 
 //Signing up
-router.post('/data',async (req,res)=>{
+router.post('/signup',async (req,res)=>{
     const {name,email,pwd,phone,address,role} = req.body;
+    // let user = null
     try {
-        const user = userDB.find({email});
-        if(user) return res.json({msg:'user already registered'});
+        const user = await userDB.find({email});
+        // if(user) return res.json({msg:'user already registered'});
 
         const emailString = '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
-        if(!email.match(emailString)) return res.json({msg:'invalid credentials'});
+        // console.log(user)
+        // if(!email.match(emailString)) return res.json({msg:'invalid credentials'});
         if(role==='technician'){
             const newUser = new userDB({
                 name,
@@ -32,11 +34,12 @@ router.post('/data',async (req,res)=>{
                 role
             });
             newUser.save()
+            res.json({msg:'user registered',id: newUser._id});
         }
+
     } catch (error) {
         return res.json({"msg":"something went wrong"});
     }
-    res.json({msg:'user registered'});
 })
 
 //ALl users
@@ -47,15 +50,15 @@ router.get('/allusers',async(req,res)=>{
 
 
 //Login API
-router.get('/data',async (req,res)=>{
+router.post('/login',async (req,res)=>{
     const {email,pwd} = req.body;
     if(!email||!pwd) return res.status(400).json({"msg":"invalid credentials"})
 
     const user = await userDB.findOne({email,pwd});
 
-    if(!user) return res.status(404).json({"msg":"No User exist"});
+    // if(!user) return res.status(404).json({"msg":"No User exist"});
 
-    res.status(200).json({user:user._id});
+    res.status(200).json({user:user});
 })
 
 router.patch('/:id',async (req,res)=>{

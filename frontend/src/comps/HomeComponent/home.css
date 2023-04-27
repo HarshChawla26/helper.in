@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
 body {
     margin: 0;
     padding: 0;
@@ -34,5 +36,12 @@ input[type="text"] {
     width: 370px;
     font-size: 15px;
     outline: none;
+}
+.btn{
+  height: 30px;
+  border: none;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  border-radius: 5px;
 }
   

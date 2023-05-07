@@ -3,12 +3,24 @@ const express = require('express');
 const serviceDB = require('../models/service');
 const router = express.Router();
 
-router.get('/',(req,res)=>{
-    res.json('service API')
+// router.get('/',(req,res)=>{
+//     res.json('service API')
+// })
+router.get('/allcities',async (req,res)=>{
+    let list = await serviceDB.find()
+    let arr = []
+    list.map((obj)=>{
+        obj.areas.map((city=>{
+            if(!arr.includes(city)){
+                arr.push(city);
+            }
+        }))
+    })
+    res.send(arr)
 })
+router.get('/city',async (req,res)=>{
 
-router.get('/:city',async (req,res)=>{
-    const {city} = req.params;
+    const {city} = req.query;
     let services =  await serviceDB.find();
     services = await services.map(e=>{
         const f = e.areas.map(el=>{
@@ -17,10 +29,22 @@ router.get('/:city',async (req,res)=>{
         e.areas = f;
         return e;
     });
-    const fil = await services.filter(e=>{
+    let fil = await services.filter(e=>{
         if(e.areas.includes(city)) return true;
         return false;
     })
+    const shuffle = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const temp = array[i];
+    
+            // Swap
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        return array;
+    };
+    shuffle(fil)
     res.send(fil);
 })
 router.post('/data',async(req,res)=>{

@@ -10,6 +10,7 @@ import Auth from "./comps/Auth/Auth";
 import { ToastContainer } from "react-toastify";
 import { useContext, useEffect } from "react";
 import resultcontext from "./context/resultContext/resultcontext";
+import Cart from "./comps/CartComponent/Cart";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
         <Route path='/results' element={<><Results/><Contacts /></>}></Route>
         <Route path="/auth/*" element={<Auth />} />
         <Route path='/profile' element={<Profile/>}/>
+        <Route path='/cart' element={<Cart/>}/>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <ToastContainer

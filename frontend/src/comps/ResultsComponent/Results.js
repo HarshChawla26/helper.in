@@ -101,16 +101,16 @@ export default function Results() {
             
             {payload&&
                 payload.map(e=>{
-                    return <ResultCard key={e._id} name={e.name} desc={e.description} price={e.price} source={'/'} />
+                    return <ResultCard key={e._id} id={e._id} name={e.name} desc={e.description} price={e.price} source={'/'} />
                 })
             }
         </div>
-        <div id="next">
+        {/* <div id="next">
             <button>Next</button>
         </div>
         <div id="previous">
             <button>Next</button>
-        </div>  
+        </div>   */}
     </div>
 
   )

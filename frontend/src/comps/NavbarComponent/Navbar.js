@@ -33,6 +33,9 @@ export default function Navbar()
             {(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')!=='')?
             <>
               <li>
+                <Link to='/cart'>Cart</Link>
+              </li>
+              <li>
                 <Link to='/profile'>My Profile</Link>
               </li>
               <li>

@@ -39,9 +39,19 @@
 .desc-in{
     float: left;
     text-align: left;
+<<<<<<< HEAD
     font-size: 0.8em;
     margin:0;
     color: white;
+=======
+}
+p{
+    /* text-align:left; */
+    /* margin-top: 1px; */
+    text-transform: none;
+    font-size: 0.85rem;
+    color: green;
+>>>>>>> 7b856a660149a8d0fedca8fec9cbeb6aceb86c73
 }
 .desc div button{
     font-size: smaller;

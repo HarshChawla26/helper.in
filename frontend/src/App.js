@@ -22,19 +22,6 @@ function App() {
   }, [sessionStorage.getItem('cities')])
 
   
-//   useEffect(()=>{
-        
-//     async function getCart(id){
-//         const response = fetch(`http://localhost:4000/auth/${id}/cart`).then(resp=>{resp.json()}).then((data)=>{ return data})
-//         // const respData = await response.json();
-//         cart.setcart(response.cart)
-//     }
-//     if(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')!==''){
-//         getCart(sessionStorage.getItem('userID'));
-//     }
-//     // renderCart()
-// },[])
-  
   return (
     <>
       <Navbar />

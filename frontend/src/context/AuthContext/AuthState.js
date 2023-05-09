@@ -20,7 +20,7 @@ const AuthState = (props)=>{
         })
         const respData = await resp.json();
         setuser(respData.user)
-        sessionStorage.setItem('userID',JSON.stringify(respData.user._id))
+        sessionStorage.setItem('userID',JSON.stringify(respData.user))
     }
     // Function to create a new user with the provided form data
     async function userSignup(data){
@@ -34,10 +34,19 @@ const AuthState = (props)=>{
         const respData = await resp.json();
         setuser(respData)
         await console.log(respData)
-        sessionStorage.setItem('userID',JSON.stringify(user.id))
+        await sessionStorage.setItem('userID',respData.id)
     }
+
+    async function deleteAccount(id){
+        const resp = await fetch(`http://localhost:4000/auth/${id}/delete`,{
+            method:'DELETE'
+        })
+        await resp.json()
+        await userLogout()
+    }
+
     return(
-    <AuthContext.Provider value={{user,userLogin,userSignup,userLogout}}>
+    <AuthContext.Provider value={{user,userLogin,userSignup,userLogout,deleteAccount}}>
         {props.children}
     </AuthContext.Provider>
     )

@@ -21,6 +21,8 @@ export default function Results() {
         setlocation(sessionStorage.getItem('location'))
         // eslint-disable-next-line
     }, [sessionStorage.getItem('location')])
+
+    
     
     useEffect(() => {
         result.setdata(JSON.parse(sessionStorage.getItem('data')))

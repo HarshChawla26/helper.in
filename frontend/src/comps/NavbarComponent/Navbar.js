@@ -1,12 +1,24 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import './navbar.css'
 import { Link, useNavigate } from 'react-router-dom'
 import authContext from './../../context/AuthContext/authContext'
 import { toast } from 'react-toastify';
+import Badge from 'react-bootstrap/Badge'
+import cartContext from '../../context/CartContext/cartContext';
 export default function Navbar() 
 {
+  const [CartCount, setCartCount] = useState(JSON.parse(sessionStorage.getItem('cart').length))
   const navigator = useNavigate();
   const userContext = useContext(authContext)
+  const cart = useContext(cartContext)
+  const badge = useRef()
+
+  useEffect(() => {
+    let clen = cart.cart.length;
+    setCartCount(clen);
+  }, [sessionStorage.getItem('cart')])
+  
+  
   async function Logout(){
     userContext.userLogout();
     await navigator('/');
@@ -33,6 +45,13 @@ export default function Navbar()
             {(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')!=='')?
             <>
               <li>
+                {
+                  (CartCount!==0)?
+                  <Badge ref={badge} pill bg="danger">
+                    {CartCount}
+                  </Badge>
+                  :''
+                }
                 <Link to='/cart'>Cart</Link>
               </li>
               <li>

@@ -31,7 +31,7 @@ router.get('/city',async (req,res)=>{
     });
     let fil = await services.filter(e=>{
         if(e.areas.includes(city)) return true;
-        return false;
+        return false;x
     })
     const shuffle = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -59,6 +59,7 @@ router.get('/data',async (req,res)=>{
     res.send(data);
 })
 
+//get 
 router.get('/:_id',async(req,res)=>{
     const {_id} = req.params;
     try {

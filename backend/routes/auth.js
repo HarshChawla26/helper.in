@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs')
 const userDB = require('../models/user')
 
 //Signing up
@@ -20,6 +21,7 @@ router.post('/signup',async (req,res)=>{
                 pwd,
                 phone,
                 services:[],
+                cart:[],
                 role
             });
             newUser.save()
@@ -48,17 +50,81 @@ router.get('/allusers',async(req,res)=>{
     res.send(users);
 })
 
+router.post('/:_id/addtocart',async(req,res)=>{
+    const {_id} = req.params;
+    const {cart} = req.body
+    const user = await userDB.findOne({_id});
+    if(user){
+        user.cart = cart
+        user.save();
+    }
+    res.send(user)
+})
 
-//Login API
+router.get('/:_id/cart',async (req,res)=>{
+    const {_id} = req.params;
+    const user = await userDB.findOne({_id})
+    res.send(user.cart)
+})
+
+router.post('/:_id/addServices',async(req,res)=>{
+    const {_id} = req.params;
+    const {cart} = req.body
+    const user = await userDB.findOne({_id});
+    if(user){
+        user.cart = cart
+        user.save();
+    }
+    res.send(user)
+})
+
+router.get('/:_id/services',async (req,res)=>{
+    const {_id} = req.params;
+    const user = await userDB.findOne({_id})
+    res.send(user.services)
+})
+
+
+
+
+// Login API
 router.post('/login',async (req,res)=>{
     const {email,pwd} = req.body;
     if(!email||!pwd) return res.status(400).json({"msg":"invalid credentials"})
 
-    const user = await userDB.findOne({email,pwd});
+    const user = await userDB.findOne({email});
 
-    // if(!user) return res.status(404).json({"msg":"No User exist"});
+    if(!user) return res.status(404).json({"msg":"Invalid credentials"});
+    const isMatch = await bcrypt.compare(pwd,user.pwd);
+    if(!isMatch){
+        return res.json({msg:'Invalid credentials'})
+    }
+    res.status(200).json({user:user._id});
+})
 
-    res.status(200).json({user});
+router.get('/:_id',async (req,res)=>{
+    const {_id} = req.params
+    const user = await userDB.findOne({_id});
+    if(!user){
+        return res.send({msg:'No user exist'})
+    }
+    res.send(user)
+})
+router.get('/:_id/services',async (req,res)=>{
+    const {_id} = req.params
+    const user = await userDB.findOne({_id});
+    if(!user){
+        return res.send({msg:'No user exist'})
+    }
+    res.send(user.services)
+})
+router.delete('/:_id/delete',async (req,res)=>{
+    const {_id} = req.params
+    const user = await userDB.findByIdAndDelete({_id});
+    if(!user){
+        return res.send({msg:'No user exist'})
+    }
+    res.send({msg:'User deleted!'});
 })
 
 router.patch('/:id',async (req,res)=>{

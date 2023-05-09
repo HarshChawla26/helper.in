@@ -15,9 +15,8 @@ function ResultCard(props) {
     const navigate = useNavigate()
     const HandleService = ()=>{
       let userObj = userCon.user;
-      if(Object.keys(userObj).length===0){
-        navigate('/auth',{redirect:true})
-      }else{
+      console.log(userObj)
+        if(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')!==''){
         let service = {
           id:props.id,
           price:props.price
@@ -46,18 +45,22 @@ function ResultCard(props) {
             cart.setcart(a)
             sessionStorage.setItem('cart',JSON.stringify(a))
           }
+          toast.success("Added to Cart", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
         }
+        
+      }else{
+        navigate('/auth',{redirect:true})
       }
-      toast.success("Added to Cart", {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      
     }
 
   return (
@@ -70,7 +73,7 @@ function ResultCard(props) {
         <p className="desc-in">{name}</p>
         <p className="desc-p">{(desc.length>100)?desc.slice(0,120)+"...":desc}</p>
         <div>
-        <span>₹ {price} per hr</span>
+        <span>₹ {price}</span>
         <Button onClick={HandleService} variant={'warning'} className="add">
           Add
         </Button>

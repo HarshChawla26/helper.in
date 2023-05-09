@@ -16,7 +16,8 @@
 }
 .BOX{
     display: flex;
-    flex-wrap: wrap;
+    
+    flex-wrap: wrap !important;
 }
 #nothing{
     margin: auto 10% ;

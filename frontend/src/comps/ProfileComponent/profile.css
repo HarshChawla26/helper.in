@@ -1,0 +1,94 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+#main{
+    background-color: rgba(223, 204, 204, 0.484);
+    /* padding: 0.5% 0% 5% 5%; */
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    
+}
+#heading{
+    color: rgb(104, 141, 30);
+    padding-left: 5%;
+}
+#bar{
+    display: flex;
+}
+#leftbar{ 
+    width: 23vw;
+    background-color: rgb(210, 202, 202);
+    
+}
+#rightbar{
+    width: 77vw;
+    background-color: rgb(225, 218, 218);
+    
+}
+.line{
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 1px;
+}
+.left{
+    text-align: center;
+    margin-top: 4vh;
+    margin-bottom: 2vh;
+}
+#mainbox1{
+    display: flex;
+    margin-left: 8%;
+    margin-top: 8%;
+}
+.box1{
+    height: 45vh;
+    width: 18vw;
+    background-color: white;
+    margin-right: 3%;
+    border: solid black 0.1vw;
+    box-shadow: 1vh 0.4vw 3.2px 0px grey;
+    border-radius: 2.5%;
+}
+#mainbox2{
+    display: flex;
+    margin-left: 8%;
+    margin-top: 2%;
+}
+.booknow{
+    padding-top: 31.2vh;
+    padding-left: 2vw;
+    
+
+}
+#pinfo{
+    padding-top: 2vh;
+    padding-left: vw;
+    
+}
+h1{
+    padding-left: 24vw;
+}
+
+#pi{
+    padding-top: 5vh;
+    display: flex;
+    justify-content:space-around;
+}
+.button{
+    width: 3.5vw;
+    background-color: rgb(156, 183, 101);
+    border-radius: 50vh;
+}
+#button{
+    padding-top: 6vh;
+    padding-left: 13vw;  
+}
+.delete{
+    height: 5vh;
+    width: 15vw;
+    background-color: rgb(156, 183, 101);
+}

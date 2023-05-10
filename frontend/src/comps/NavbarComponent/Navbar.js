@@ -23,7 +23,7 @@ export default function Navbar()
     if(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')!==''){
       getCartCount()
     }
-  }, [])
+  }, [CartCount])
   
   
   async function Logout(){

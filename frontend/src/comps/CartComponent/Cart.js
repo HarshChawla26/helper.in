@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router'
 import Button from 'react-bootstrap/Button';
 import cartContext from '../../context/CartContext/cartContext';
 import { toast } from 'react-toastify';
-import {TimePicker,DatePicker} from 'antd' 
 function Cart() {
     const cartcon = useContext(cartContext)
     const [cart,setcart] = useState([])
+
     const [amount, setamount] = useState(0)
     const navigator = useNavigate()
+
+
     function amounting(c){
             let arr = c;
             let num = 0;
@@ -83,7 +85,7 @@ function Cart() {
                 <div id='cart-area'>
                      {
                     (cart.length>0)?
-                        cart.map((ele,index)=>{    
+                        cart.map((ele,index)=>{
                         return (
                                 <div key={index} className='box' id="item-card">
                                     <div className="innerbox">
@@ -93,8 +95,9 @@ function Cart() {
                                     <div className="desc">
                                         <div>
                                             <p className="desc-in">{ele.name}</p>
-                                            <TimePicker.RangePicker></TimePicker.RangePicker>
-                                            <DatePicker></DatePicker>
+                                            {/* <TimePicker.RangePicker name='timePicker' onChange={(e)=>{handleSlotinput(e,'time',ele.id)}}></TimePicker.RangePicker>
+                                            <DatePicker  name='datePicker' onChange={(e)=>{handleSlotinput(e,'date',ele.id)}} ></DatePicker>
+                                            <Button className='delete-btn' onClick={handleSlot} variant='primary'>Check availability</Button> */}
                                         </div>
 
                                         <div>

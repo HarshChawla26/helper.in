@@ -1,5 +1,5 @@
 import React, {  useEffect, useState } from 'react'
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import { Link } from 'react-router-dom'
 import './profile.css'
 import PersonalInfo from './PersonalInfo'
@@ -33,7 +33,7 @@ export default function Profile() {
                 <Routes>
                     <Route path='/info' element={<PersonalInfo key={data._id} id={data._id} name={data.name} email={data.email} phone={data.phone} address={data.address} />}></Route>
                     <Route path='/services' element={<Services/>}></Route>
-                    <Route path='*' element={<PersonalInfo key={data._id} id={data._id} name={data.name} email={data.email} phone={data.phone} address={data.address}/>}></Route>
+                    <Route path='*' element={<Navigate to='./info'/>}></Route>
                 </Routes>
             </div>
         </div>

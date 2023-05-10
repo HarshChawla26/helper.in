@@ -37,24 +37,29 @@ const allSlots = [{
 
 // Route to get all available slots of an service
 router.get('/avSlots',async (req,res)=>{
-    const {id,slot} = req.body;
+    const {serviceID,slot} = req.body;
     try {
+        const check = await slotsDB.findOne({serviceID});
+        // if(!check){
+        //     return res.json({msg:'nothing to show'});
+        // }
         
-        const check = await slotsDB.findOne({serviceID:id});
-        if(!check){
-            return res.json({msg:'nothing to show'});
-        }
-        
-        let arr = allSlots;
+        let arr = await check.slots;
+        arr = arr.filter((e)=>{
+            return e.date===slot.date;
+        })
         arr = arr.filter((e)=>{
             const slot_start_hr = parseInt(slot.stime.slice(0,2))
             const slot_end_hr = parseInt(slot.etime.slice(0,2))
             const ele_start_hr = parseInt(e.stime.slice(0,2))
             const el_end_hr = parseInt(e.etime.slice(0,2))
             
-            return !(ele_start_hr>=slot_start_hr && el_end_hr<=slot_end_hr);
+            return ele_start_hr>=slot_start_hr && el_end_hr<=slot_end_hr;
         })
-        res.send(arr)
+        if(arr.length>0){
+            return res.send({msg:false})
+        }
+        res.send({msg:true})
     } catch (error) {
         return res.json({msg:"something went wrong"})
     }
@@ -77,12 +82,8 @@ router.post('/data',async (req,res)=>{
             const slot = new slotsDB({serviceID,slots});
             const response = await slot.save()
         }else{
-            // let arr = await checkSlot.slots;
-            // let c = await arr.filter((e)=>{
-            //     console.log(e)
-            //     return true;
-            // })
-            res.json({msg:'Already Exist'})
+            checkSlot.slots.push(slots);
+            checkSlot.save()
         }
         
         res.json({msg:'Data is Posted'});

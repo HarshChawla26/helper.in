@@ -8,7 +8,6 @@ const ResultState = (props)=>{
         const response = await fetch('http://localhost:4000/services/allcities');
         const respData = await response.json();
         setcities(respData)
-        sessionStorage.setItem('cities',respData)
     }
 
     async function fetchData(city){

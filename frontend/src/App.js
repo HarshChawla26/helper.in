@@ -11,21 +11,17 @@ import { ToastContainer } from "react-toastify";
 import { useContext, useEffect } from "react";
 import resultcontext from "./context/resultContext/resultcontext";
 import Cart from "./comps/CartComponent/Cart";
-import cartContext from "./context/CartContext/cartContext";
+// import cartContext from "./context/CartContext/cartContext";
 
 function App() {
-  const cart = useContext(cartContext)
+  // const cart = useContext(cartContext)
   const result = useContext(resultcontext);
   useEffect(() => {
     result.fetchcities()
      // eslint-disable-next-line
   }, [sessionStorage.getItem('cities')])
-  
-  useEffect(() => {
-    cart.setcart(JSON.parse(sessionStorage.getItem('cart')))
-    // eslint-disable-next-line
-}, [sessionStorage.getItem('cart')])
 
+  
   return (
     <>
       <Navbar />
@@ -42,7 +38,7 @@ function App() {
         />
         <Route path='/results' element={<><Results/><Contacts /></>}></Route>
         <Route path="/auth/*" element={<Auth />} />
-        <Route path='/profile' element={<Profile/>}/>
+        <Route path='/profile/*' element={<Profile/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

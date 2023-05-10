@@ -25,23 +25,8 @@ export default function Login() {
     e.preventDefault();
     await userState.userLogin(formData);
     
-    toast.success("Login successfull!", {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-
-    await navigator("/");
+    
   }
-  // useEffect(() => {
-  //   console.log(formData)
-  // }, [formData])
-
   return (
     <>
       <div className="login-container">

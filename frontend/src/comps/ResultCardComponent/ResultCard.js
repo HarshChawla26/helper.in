@@ -13,54 +13,25 @@ function ResultCard(props) {
     const cart = useContext(cartContext)
     const userCon = useContext(AuthContext)
     const navigate = useNavigate()
+    
     const HandleService = ()=>{
       let userObj = userCon.user;
-      console.log(userObj)
-        if(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')!==''){
-        let service = {
-          id:props.id,
-          price:props.price
+      if(!userObj||!sessionStorage.getItem('userID')||(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')==='')){
+        navigate('/auth',{redirect:true});
+        return;
       }
-      if(cart.cart.length===0){
-          let a = []
-          a.push(service)
-          cart.setcart(a)
-          sessionStorage.setItem('cart',JSON.stringify(a))
-        }else{
-          // a : cart
-          // c : check
-          var a = cart.cart;
-          let c = a.filter((e)=>{
-            return e.id===props.id;
-          })
-          if(c.length>0){
-            a = a.filter((e)=>{
-              return e.id!==props.id;
-            })
-            a = [...a,service];
-            cart.setcart(a)
-            sessionStorage.setItem('cart',JSON.stringify(a))
-          }else{
-            a = [...a,service];
-            cart.setcart(a)
-            sessionStorage.setItem('cart',JSON.stringify(a))
-          }
-          toast.success("Added to Cart", {
-            position: "bottom-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-        }
-        
-      }else{
-        navigate('/auth',{redirect:true})
-      }
-      
+          
+      cart.addtocart(sessionStorage.getItem('userID'),props);
+        toast.success("Added to Cart", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
     }
 
   return (

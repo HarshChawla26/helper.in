@@ -2,57 +2,61 @@ import React, { useContext, useEffect, useState } from 'react'
 import './cart.css';
 import { useNavigate } from 'react-router'
 import Button from 'react-bootstrap/Button';
-import ItemCard from './ItemCardComponent/ItemCard';
 import cartContext from '../../context/CartContext/cartContext';
 import { toast } from 'react-toastify';
-
 function Cart() {
     const cartcon = useContext(cartContext)
-    const [c,setc] = useState([])
     const [cart,setcart] = useState([])
+
+    const [amount, setamount] = useState(0)
     const navigator = useNavigate()
 
-    function deleteItem(id){
-        let a = cartcon.cart;
-        a = a.filter((e)=>{
-            return e.id!==id;
-        })
-        setcart(a);
-        sessionStorage.setItem('cart',JSON.stringify(cart))
+
+    function amounting(c){
+            let arr = c;
+            let num = 0;
+            for(let i=0;i<arr.length;i++){
+                num += arr[i].price;
+            }
+            // sessionStorage.setItem('amount',num)
+            setamount(num);
     }
-    useEffect(()=>{
-        console.log(cartcon.cart)
-        if(sessionStorage.getItem('cart')){
-            setc(JSON.parse(sessionStorage.getItem('cart')))
-            async function getServicesData(id){
-                const response = await fetch(`http://localhost:4000/services/${id}`)
-                const respData = await response.json()
-                return respData.service
-            }
-            let a = []
-            JSON.parse(sessionStorage.getItem('cart')).map(async (e)=>{
-                const k = await getServicesData(e.id)
-                await a.push(k)
-            })
-            setcart(a)
-        }
-    },[])
+    async function getCartData(){
+        const response = await fetch(`http://localhost:4000/auth/${sessionStorage.getItem('userID')}/cart`)
+        const respData = await response.json()
+        await setcart(respData.cart)
+        await amounting(respData.cart)
+    }
+    function deleteItem(id){
+        cartcon.deleteFromCart(sessionStorage.getItem('userID'),id)
+        toast.success("Deleted from Cart", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        getCartData()
+    }
+
     useEffect(() => {
-        if(sessionStorage.getItem('cart')){
-            setc(JSON.parse(sessionStorage.getItem('cart')))
-            async function getServicesData(id){
-                const response = await fetch(`http://localhost:4000/services/${id}`)
-                const respData = await response.json()
-                return respData.service
-            }
-            let a = []
-            JSON.parse(sessionStorage.getItem('cart')).map(async (e)=>{
-                const k = await getServicesData(e.id)
-                await a.push(k)
-            })
-            setcart(a)
+        if(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')!==''){
+            getCartData()
         }
-    },[cartcon.cart])
+        // eslint-disable-next-line
+    }, [])
+    
+
+    
+    // async function getServicesData(id){
+    //     const response = await fetch(`http://localhost:4000/services/${id}`)
+    //     const respData = await response.json()
+    //     return respData.service
+    // }
+
     
     function handlePurchase(){
         toast.success('Purchase done!',{
@@ -65,6 +69,7 @@ function Cart() {
             progress: undefined,
             theme: "colored",
           })
+          cartcon.purchase(sessionStorage.getItem('userID'))
         navigator('/');
     }
     // if(cartcon.cart.length===0){
@@ -78,10 +83,9 @@ function Cart() {
             <h3>Items In cart</h3>
             <div id='all-area'>
                 <div id='cart-area'>
-                    {/* {cart.length===0} */}
-                    {
+                     {
                     (cart.length>0)?
-                        cart.map((ele,index)=>{    
+                        cart.map((ele,index)=>{
                         return (
                                 <div key={index} className='box' id="item-card">
                                     <div className="innerbox">
@@ -91,6 +95,9 @@ function Cart() {
                                     <div className="desc">
                                         <div>
                                             <p className="desc-in">{ele.name}</p>
+                                            {/* <TimePicker.RangePicker name='timePicker' onChange={(e)=>{handleSlotinput(e,'time',ele.id)}}></TimePicker.RangePicker>
+                                            <DatePicker  name='datePicker' onChange={(e)=>{handleSlotinput(e,'date',ele.id)}} ></DatePicker>
+                                            <Button className='delete-btn' onClick={handleSlot} variant='primary'>Check availability</Button> */}
                                         </div>
 
                                         <div>
@@ -102,12 +109,12 @@ function Cart() {
                             )
                     }
                     ):<div>No items to show</div>
-                    }
+                    } 
                 </div>
                 <div id='amount-area'>
                     <div>
                         <h4>Total Amount to be paid</h4>
-                        <p>₹ 400 per hr</p>
+                        <p>₹ {amount} </p>
                         <Button onClick={handlePurchase} variant='warning'>Payment</Button>
                     </div>
                 </div>

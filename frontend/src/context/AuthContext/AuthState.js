@@ -1,12 +1,16 @@
 import { useState } from "react"
 import AuthContext from "./authContext"
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const AuthState = (props)=>{
     const [user, setuser] = useState({})
+    const nav = useNavigate()
     //Function that logouts the user
     function userLogout(){
         setuser({});
         sessionStorage.setItem('userID','')
+        nav('/',{redirect:true})
     }
 
     // Function to Login the user with the provided form data
@@ -19,8 +23,33 @@ const AuthState = (props)=>{
             body:JSON.stringify(data)
         })
         const respData = await resp.json();
-        setuser(respData.user)
-        sessionStorage.setItem('userID',JSON.stringify(respData.user._id))
+        if(respData.msg){
+            toast.error(`${respData.msg}`, {
+                position: "bottom-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+              })
+            return;
+        }else{
+            await nav('/')
+            setuser(respData.user)
+            sessionStorage.setItem('userID',respData.user)
+            toast.success("Login successfull!", {
+                position: "bottom-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+              });
+        }
     }
     // Function to create a new user with the provided form data
     async function userSignup(data){
@@ -34,10 +63,19 @@ const AuthState = (props)=>{
         const respData = await resp.json();
         setuser(respData)
         await console.log(respData)
-        sessionStorage.setItem('userID',JSON.stringify(user.id))
+        await sessionStorage.setItem('userID',respData.id)
     }
+
+    async function deleteAccount(id){
+        const resp = await fetch(`http://localhost:4000/auth/${id}/delete`,{
+            method:'DELETE'
+        })
+        await resp.json()
+        await userLogout()
+    }
+
     return(
-    <AuthContext.Provider value={{user,userLogin,userSignup,userLogout}}>
+    <AuthContext.Provider value={{user,userLogin,userSignup,userLogout,deleteAccount}}>
         {props.children}
     </AuthContext.Provider>
     )

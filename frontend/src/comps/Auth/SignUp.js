@@ -60,16 +60,7 @@ export default function SignUp() {
     async function signupHandler(e){
       e.preventDefault()
       await auth.userSignup(formData)
-      toast.success("Signup successfull!", {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      
       if(sessionStorage.getItem('location')&&sessionStorage.getItem('location')!==''){
         await navigator('/results')
       }

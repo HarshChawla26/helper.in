@@ -21,6 +21,7 @@ export default function Home() {
     e.preventDefault()
     if(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')!==''){
       result.fetchData(search);
+      sessionStorage.setItem('location',search)
       navigate(`/results?city=${search}`)
     }else{
       navigate('/auth')

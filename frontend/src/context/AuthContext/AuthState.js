@@ -65,10 +65,23 @@ const AuthState = (props)=>{
             body:JSON.stringify(data)
         })
         const respData = await resp.json();
-        setuser(respData)
-        window.location.reload(false)
-        await sessionStorage.setItem('userID',respData.user._id)
-        await sessionStorage.setItem('userType',respData.role)
+        if(respData.msg==='Technician registered'||respData.msg==='user registered'){
+            toast.success("Signup successfull!", {
+                position: "bottom-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+            await nav('/');
+            setuser(respData.user)
+            window.location.reload(false)
+            sessionStorage.setItem('userID',respData.user._id)
+            sessionStorage.setItem('userType',respData.role)
+        }
     }
 
     async function deleteAccount(id){

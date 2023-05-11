@@ -24,8 +24,6 @@ export default function Login() {
   async function handleLogin(e) {
     e.preventDefault();
     await userState.userLogin(formData);
-    
-    
   }
   return (
     <>

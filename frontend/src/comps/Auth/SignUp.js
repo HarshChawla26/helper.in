@@ -58,6 +58,7 @@ export default function SignUp() {
       setformData(val=>({...val,[name]:value}))
     }
     async function signupHandler(e){
+      console.log(formData)
       e.preventDefault()
       await auth.userSignup(formData)
       toast.success("Signup successfull!", {

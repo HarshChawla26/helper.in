@@ -51,6 +51,7 @@ export default function Services() {
                   <p>{e.price}</p>
                   <p>{e.date}</p>
                   <p>{e.time}</p>
+                  <p>{e.status}</p>
                   <Button onClick={()=>{cancelOrder(e.id)}} className='delete-btn' variant='danger'> Cancel </Button>
               </div>
           </div>

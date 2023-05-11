@@ -32,11 +32,11 @@ export default function Home() {
   
   return (
     <div>
-
       <div className="mycontainer">
-          <h1>NAMASTE</h1>
+        <center>
+          <h1 id='namaste-h1'>NAMASTE</h1>
           <p>Services, on demand</p>
-      
+        </center>
       <form >
         <select id="search" onChange={handleinput}>
           <option value='' defaultValue> </option>
@@ -44,7 +44,7 @@ export default function Home() {
             return <option key={index} value={e}>{e}</option>
           })}
         </select>
-        <Button onClick={handlesearch} variant={'dark'} className='button'>Search</Button>
+        <Button onClick={handlesearch} variant={'dark'} id='home-search-button'>Search</Button>
       </form>
       </div>
     </div>

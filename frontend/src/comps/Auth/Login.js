@@ -31,7 +31,7 @@ export default function Login() {
     <>
       <div className="login-container">
         <div>
-          <h2> Welcome to Our Application </h2>
+          <h2 className="login-h2"> Welcome to Our Application </h2>
           <p> Please login to use the platform </p>
         </div>
 

@@ -13,7 +13,7 @@ router.get('/allservices',async (req,res)=>{
         let list = await serviceDB.find()
         let arr = []
         list.map((obj)=>{
-            console.log(obj.name)
+            // console.log(obj.name)
             arr.push(obj.name);
         })
         res.send({msg:"Services recieved",arr})

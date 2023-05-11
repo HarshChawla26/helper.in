@@ -9,7 +9,7 @@ import cartContext from '../../context/CartContext/cartContext';
 import AuthContext from '../../context/AuthContext/authContext';
 
 function ResultCard(props) {
-    const {name,desc,price,source} = props;
+    const {name,desc,price,source,img} = props;
     const cart = useContext(cartContext)
     const userCon = useContext(AuthContext)
     const navigate = useNavigate()
@@ -36,18 +36,19 @@ function ResultCard(props) {
 
   return (
     <div className="box">
-      <div className="innerbox">
-        {/* eslint-disable-next-line*/}
-        <img src={source} alt="image" />
-      </div>
+      {/* <div className="innerbox"> */}
+        <img className="service-img" src={img} alt="image" />
+      {/* </div> */}
       <div className="desc">
         <p className="desc-in">{name}</p>
-        <p className="desc-p">{(desc.length>100)?desc.slice(0,120)+"...":desc}</p>
+        <p className="desc-p">
+          {desc.length > 100 ? desc.slice(0, 120) + "..." : desc}
+        </p>
         <div>
-        <span>₹ {price}</span>
-        <Button onClick={HandleService} variant={'warning'} className="add">
-          Add
-        </Button>
+          <span>₹ {price}</span>
+          <Button onClick={HandleService} variant={"warning"} className="add">
+            Add
+          </Button>
         </div>
       </div>
     </div>

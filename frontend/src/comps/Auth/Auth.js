@@ -17,7 +17,7 @@ export default function Auth() {
       </div>
 
       <div className="auth-right">
-        <img src={require("../../Assets/auth.png")} alt="Technician.png" />
+        <img id="finger-scan" src={require("../../Assets/auth.png")} alt="Technician.png" />
       </div>
     </div>
     </div>

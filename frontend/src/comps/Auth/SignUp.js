@@ -69,46 +69,45 @@ export default function SignUp() {
   return (
     <div className="login-container">
       <div>
-        <h2> Welcome to Our Application </h2>
-        <p> Please signup to use the platform </p>
+        <h2 className="login-h2"> Welcome to Our Application </h2>
+        <p className="login-h2"> Please signup to use the platform </p>
       </div>
 
-      <form id='signupform'>
+      <form id="signupform">
         <Form.Group className="formInput">
-            <Form.Label className="p"> Enter Full Name </Form.Label>
-            <Form.Control
-              onChange={handleinput}
-              required
-              type="text"
-              name="name"
-              placeholder="John Doe"
-            />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          <Form.Label className="p"> Enter Full Name </Form.Label>
+          <Form.Control
+            onChange={handleinput}
+            required
+            type="text"
+            name="name"
+            placeholder="John Doe"
+          />
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="formInput">
-            <Form.Label className="p">Enter Email</Form.Label>
-            <Form.Control
-              onChange={handleinput}
-              required
-              type="email"
-              name="email"
-              placeholder="example@gmail.com"
-            />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          <Form.Label className="p">Enter Email</Form.Label>
+          <Form.Control
+            onChange={handleinput}
+            required
+            type="email"
+            name="email"
+            placeholder="example@gmail.com"
+          />
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
-          <Form.Group className="formInput">
-            <Form.Label className="p"> Enter Password </Form.Label>
-            <Form.Control
-              onChange={handleinput}
-              required
-              type="password"
-              name="pwd"
-              placeholder=". . ."
-            />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Group className="formInput">
+          <Form.Label className="p"> Enter Password </Form.Label>
+          <Form.Control
+            onChange={handleinput}
+            required
+            type="password"
+            name="pwd"
+            placeholder=". . ."
+          />
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
         <div>
-
           <Form.Group className="formInput">
             <Form.Label className="p"> Enter Phone Number </Form.Label>
             <Form.Control
@@ -117,40 +116,41 @@ export default function SignUp() {
               type="text"
               name="phone"
               maxLength={10}
-              onKeyUp={(e)=>{return onlyNumberKey(e)}}
+              onKeyUp={(e) => {
+                return onlyNumberKey(e);
+              }}
               placeholder="9123456780"
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        </Form.Group>
-        
+          </Form.Group>
+
           <div id="select" className="formInput">
-            <p className="p"> Enter Role </p>
-            <select name="role" onChange={handleinput} form='signupform'>
+            <p className="p login-h2"> Enter Role </p>
+            <select name="role" onChange={handleinput} form="signupform">
               <option value="None" defaultValue></option>
               <option value="user">User</option>
               <option value="technician">Technician</option>
             </select>
+          </div>
         </div>
-        </div>
-          <Form.Group className="formInput">
-            <Form.Label className="p"> Enter Address </Form.Label>
-            <Form.Control
-              onChange={handleinput}
-              required
-              type="text"
-              name="address"
-              placeholder=" "
-            />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Group className="formInput">
+          <Form.Label className="p"> Enter Address </Form.Label>
+          <Form.Control
+            onChange={handleinput}
+            required
+            type="text"
+            name="address"
+            placeholder=" "
+          />
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
-        <small>Select none if you are an user</small>
+        <small className="sm-p">Select none if you are an user</small>
         <Form.Select onChange={handleinput} aria-label="Default select example">
           <option>none</option>
-          {data&&data.map((e)=>{
-            return(
-              <option value={e}>{e}</option>
-            )
-          })}
+          {data &&
+            data.map((e) => {
+              return <option value={e}>{e}</option>;
+            })}
         </Form.Select>
         <div id="auth-btn">
           <button onClick={signupHandler}>Sign Up</button>
@@ -159,7 +159,10 @@ export default function SignUp() {
 
       <div>
         <h1> </h1>
-        <p style={{'display':"inline-block"}}>Already have a account?</p> <Link to="/auth/login">Login?</Link>
+        <p className="sm-p" style={{ display: "inline-block" }}>
+          Already have a account?
+        </p>{" "}
+        <Link to="/auth/login">Login?</Link>
       </div>
     </div>
   );

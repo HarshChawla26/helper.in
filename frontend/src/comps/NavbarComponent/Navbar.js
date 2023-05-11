@@ -55,49 +55,58 @@ export default function Navbar()
     navigator('/');
   }
   return (
-      <nav className="Navbar p-0 sticky-top">
-          <div id="website-name">
-            <Link style={{'color':'#eee','textDecoration':'none'}}className='text-light' to='/'>
-             helpr.in
-            </Link>
-          </div>
-          <ul className="navbar-links">
-            <li><Link  to="/">Home</Link></li>
-            {(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')!=='')?
-            <>
-            {(!isTech)?(
+    <nav className="Navbar p-0 sticky-top">
+      <div id="website-name">
+        <Link
+          style={{ color: "#eee", textDecoration: "none" }}
+          className="text-light"
+          to="/"
+        >
+          helpr.in
+        </Link>
+      </div>
+      <ul className="navbar-links">
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        {sessionStorage.getItem("userID") &&
+        sessionStorage.getItem("userID") !== "" ? (
+          <>
+            {!isTech ? (
               <li>
-                {
-                  (CartCount!==0)?
+                {CartCount !== 0 ? (
                   <Badge ref={badge} pill bg="danger">
                     {CartCount}
                   </Badge>
-                  :''
-                }
-                <Link to='/cart'>Cart</Link>
+                ) : (
+                  ""
+                )}
+                <Link to="/cart">Cart</Link>
               </li>
-            ):(<></>)}
-              
-              <li>
-                <Link to='/profile'>My Profile</Link>
-              </li>
-              <li>
-                <Link onClick={Logout}>Logout</Link>
-              </li>
-            </>
-            :
-            <>
-              <li>
-                <Link to="/auth/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/auth/signup">Signup</Link>
-              </li>
-            </>
-            }
-          </ul>
+            ) : (
+              <></>
+            )}
+
+            <li>
+              <Link to="/profile">My Profile</Link>
+            </li>
+            <li>
+              <Link onClick={Logout}>Logout</Link>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/auth/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/auth/signup">Signup</Link>
+            </li>
+          </>
+        )}
+      </ul>
     </nav>
-  )
+  );
 }
 
 

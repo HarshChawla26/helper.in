@@ -22,6 +22,11 @@ export default function Results() {
         // eslint-disable-next-line
     }, [sessionStorage.getItem('location')])
 
+    // useEffect(() => {
+    //     if(!sessionStorage.getItem('location')){
+    //         sessionStorage   
+    //     }
+    // }, [])
     
     
     useEffect(() => {
@@ -73,7 +78,7 @@ export default function Results() {
                 <select id="search" onChange={handleinput} ref={loc}>
                     <option value=''> </option>
                     {result.cities.map((e,index)=>{
-                        if(sessionStorage.getItem('location').toLowerCase()===e.toLowerCase()){
+                        if(sessionStorage.getItem('location')&&sessionStorage.getItem('location').toLowerCase()===e.toLowerCase()){
                             return <option key={index} value={e} selected>{e}</option>
                         }
                         return <option key={index} value={e}>{e}</option>

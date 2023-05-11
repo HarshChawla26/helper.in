@@ -18,7 +18,7 @@ function App() {
   const [isTech, setisTech] = useState(sessionStorage.getItem('userType'))
   
   useEffect(() => {
-    if(sessionStorage.getItem('userType')&&sessionStorage.getItem('userType')!=='technician'){
+    if(sessionStorage.getItem('userType')&&sessionStorage.getItem('userType')==='technician'){
       setisTech(true)
     }else{
       setisTech(false)
@@ -31,7 +31,7 @@ function App() {
      // eslint-disable-next-line
   }, [sessionStorage.getItem('cities')])
   
-  if(isTech){
+  if(sessionStorage.getItem('userType')&&sessionStorage.getItem('userType')==='technician'){
     return (
       <>
         <Navbar />

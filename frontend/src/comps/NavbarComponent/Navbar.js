@@ -13,7 +13,7 @@ export default function Navbar()
 
   }
   useEffect(() => {
-    if(sessionStorage.getItem('userType')&&sessionStorage.getItem('userType')!=='technician'){
+    if(sessionStorage.getItem('userType')&&sessionStorage.getItem('userType')==='technician'){
       setisTech(true)
     }else{
       setisTech(false)
@@ -65,7 +65,7 @@ export default function Navbar()
             <li><Link  to="/">Home</Link></li>
             {(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')!=='')?
             <>
-            {(isTech)?(
+            {(!isTech)?(
               <li>
                 {
                   (CartCount!==0)?

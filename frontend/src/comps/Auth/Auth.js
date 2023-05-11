@@ -6,7 +6,7 @@ import SignUp from "./SignUp";
 
 export default function Auth() {
   return (
-    <div id="wrapper">
+    <div id="wrapper-auth">
     <div className="auth-container">
       <div className="auth-left">
         <Routes>

@@ -35,18 +35,18 @@ function ResultCard(props) {
     }
 
   return (
-    <div className="box">
+    <div className="box-r">
       {/* <div className="innerbox"> */}
-        <img className="service-img" src={img} alt="image" />
+        <img className="service-img-r" src={img} alt="image" />
       {/* </div> */}
-      <div className="desc">
-        <p className="desc-in">{name}</p>
-        <p className="desc-p">
+      <div className="desc-r">
+        <p className="desc-in-r">{name}</p>
+        <p className="desc-p-r">
           {desc.length > 100 ? desc.slice(0, 120) + "..." : desc}
         </p>
         <div>
-          <span>₹ {price}</span>
-          <Button onClick={HandleService} variant={"warning"} className="add">
+          <span className='p-r-c'>₹ {price}</span>
+          <Button onClick={HandleService} variant={"warning"} className="add-r">
             Add
           </Button>
         </div>

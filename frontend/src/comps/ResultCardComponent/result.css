@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,700');
 
-.box{
+.box-r{
     /* border:3px solid rgb(255, 251, 214); */
     margin: 10px auto;
     padding: 7px;
@@ -16,9 +16,13 @@
     width: 37%;
     height: 190px;
 }
-.service-img{
+.p-r-c{
+    color: white;
+    margin-right: 10px;
+}
+.service-img-r{
     height: 70%;
-    width: 30%;
+    width: 35%;
     margin-right: 10px;
     border-radius: 10px;
 }
@@ -30,7 +34,7 @@
     background-color: rgba(100, 100, 100, 0.744);
     background-color: wheat;
 } */
-.desc{
+.desc-r{
     width: 60%;
     height:90%;
     overflow: hidden;
@@ -41,7 +45,7 @@
     justify-content: space-evenly;
     letter-spacing: 1px;
 }
-.desc-in{
+.desc-in-r{
     float: left;
     text-align: left;
     font-size: 0.8em;
@@ -56,7 +60,7 @@
     display: flex;
     justify-content: space-between;
 }
-.desc-p{
+.desc-p-r{
     margin:0;
     font-size: 0.7em;
     color:#a8a5a5;
@@ -66,7 +70,7 @@
 button:active{
     background-color: yellow;
 }
-.add{
+.add-r{
     width: 120px;
     height: 40px;
     margin: 5px auto;

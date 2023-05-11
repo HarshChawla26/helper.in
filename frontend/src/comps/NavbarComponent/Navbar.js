@@ -55,7 +55,7 @@ export default function Navbar()
     navigator('/');
   }
   return (
-    <nav className="Navbar p-0 sticky-top">
+    <nav className="nav-a">
       <div id="website-name">
         <Link
           style={{ color: "#eee", textDecoration: "none" }}

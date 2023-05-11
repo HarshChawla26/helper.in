@@ -1,15 +1,15 @@
-#wrapper{
+#wrapper-auth{
     width:100%;
     height:100%;
-    background-color: black;
+    background-color: #171a21;
     overflow: hidden !important;
     /* overflow-x: hidden !important; */
     min-height: 100vh;
-    margin-top: -65px;
+    /* margin-top: -65px; */
 }
 .auth-container{
     overflow-x: hidden !important;
-    width: 70%;
+    width: 75%;
     margin: 6% auto 0px auto;
     background-color: #393E46;
     height: 80%;
@@ -71,5 +71,5 @@ form div button:hover{
     margin-top: 15px;
 }
 .sm-p{
-    color:rgba(255, 192, 1, 0.721)
+    color:rgb(255, 192, 1)
 }

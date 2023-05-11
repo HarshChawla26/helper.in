@@ -68,7 +68,7 @@ export default function PersonalInfo(props) {
                 <h5>Address</h5>
             </div>
                     
-            <div>
+            <div className='pro-inps'>
                 <input type="text" placeholder="Enter your name" value={props.name} disabled/>
                 <br/><br/>
                 <input type="email" placeholder="@gmail.com"  value={props.email} disabled/>
@@ -78,10 +78,10 @@ export default function PersonalInfo(props) {
                 <input type="address" placeholder="Type your address" value={props.address} disabled/>
             </div>
       </div>
-        <div id="button">
-            <button className="delete">Edit</button><br/><br/>
-            <button className="delete"><h5>Reset Password</h5></button><br/><br/>
-            <button onClick={deleteAccount} className="delete"><h5>Delete Account</h5></button>
+        <div id="buttons">
+            <button className="delete-p">Edit</button><br/><br/>
+            <button className="delete-p">Reset Password</button><br/><br/>
+            <button onClick={deleteAccount} className="delete-p del-p-d" variant="danger"><h5>Delete Account</h5></button>
         </div>
     </div>
   )

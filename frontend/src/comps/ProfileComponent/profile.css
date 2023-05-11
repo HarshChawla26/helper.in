@@ -1,12 +1,14 @@
 #bar{
     display: flex;
     min-height:560px;
+    font-family: 'Lato', sans-serif;
 }
 #leftbar{ 
     width: 20%;
     padding: 2%;
     text-align: center;
-    background-color: rgb(210, 202, 202);
+    background-color: #171a21;
+    color: white;
 }
 #rightbar{
     width: 80%;
@@ -53,16 +55,25 @@
     color:rgb(15, 12, 12)
 }
 #pinfo{
-    padding-top: 2vh;
-    padding-left: vw;
+    background-color: #222831;
+    padding: 20px;
+    height: 100%;
+    color: white;
+    /* padding-top: 2vh; */
+    /* padding-left: vw; */
+
     
 }
 .nothing{
     margin-top:10%;
     text-align: center;
 }
-h1{
+#pinfo h1{
     /* padding-left: 24vw; */
+    color: rgb(255, 162, 0);
+}
+.pro-inps{
+    border-radius: 10px;
 }
 
 #pi{
@@ -70,17 +81,31 @@ h1{
     display: flex;
     justify-content:space-around;
 }
+#pi h5{
+    color: rgb(255, 162, 0);
+}
 .button{
     width: 3.5vw;
     background-color: rgb(156, 183, 101);
     border-radius: 50vh;
 }
-#button{
-    padding-top: 6vh;
-    padding-left: 13vw;  
+#buttons{
+    /* padding-top: 6vh; */
+    /* padding-left: 13vw;   */
+    padding: 30px;
+    display: flex;
+    justify-content: space-around;
 }
-.delete{
+.delete-p{
     height: 5vh;
     width: 15vw;
-    background-color: rgb(156, 183, 101);
+    background-color: rgb(253, 163, 9);
+    border-radius: 10px;
+    color: white;
+    outline: none;
+    font-size: 1.1rem;
+    border: none;
+}
+.del-p-d{
+    background-color: red;
 }

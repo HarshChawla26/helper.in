@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {Link, useNavigate} from "react-router-dom"
 import AuthContext from "../../context/AuthContext/authContext";
 import "./styles/login.css";
@@ -8,18 +8,43 @@ import Form from 'react-bootstrap/Form';
 export default function SignUp() {
   const navigator = useNavigate();
   const auth = useContext(AuthContext);
+  const [data, setdata] = useState([])
   
   function onlyNumberKey(evt) {
     var num = /[^0-9]/gi;
     evt.target.value = evt.target.value.replace(num,"");
 }
+
+  useEffect(() => {
+    async function getServices(){
+      const response = await fetch(`http://localhost:4000/services/allservices`);
+      const resp = await response.json();
+      if(resp.msg==='Services recieved'){
+        await setdata(resp.arr)
+      }else{
+        await toast.error(resp.msg, {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        })
+      }
+    }
+    getServices()
+  }, [])
+  
   const [formData, setformData] = useState({
     name: "",
     email: "",
     pwd: "",
     phone: "",
     address: "",
-    role: ""
+    role: "",
+    service:""
     })
     function handleinput(e){
       const name=e.target.name;
@@ -127,6 +152,15 @@ export default function SignUp() {
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
+        <small>Select none if you are an user</small>
+        <Form.Select onChange={handleinput} aria-label="Default select example">
+          <option>none</option>
+          {data&&data.map((e)=>{
+            return(
+              <option value={e}>{e}</option>
+            )
+          })}
+        </Form.Select>
         <div id="auth-btn">
           <button onClick={signupHandler}>Sign Up</button>
         </div>

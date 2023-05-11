@@ -6,7 +6,6 @@ const router = express.Router();
 const auth = require('./routes/auth')
 
 const service = require('./routes/services');
-const slots = require('./routes/slot');
 const cors = require('cors')
 
 app.use(cors())
@@ -18,7 +17,6 @@ const PORT = 4000;
 
 app.use('/auth',auth);
 app.use('/services',service)
-app.use('/slots',slots)
 
 
 app.get('/',(req,res)=>{

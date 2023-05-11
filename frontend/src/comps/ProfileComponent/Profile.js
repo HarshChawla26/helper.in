@@ -6,8 +6,11 @@ import PersonalInfo from './PersonalInfo'
 import Services from './Services'
 // import AuthContext from "./../../context/AuthContext/authContext"
 export default function Profile() {
+    const [isTech, setisTech] = useState(sessionStorage.getItem('userType'))
+  
     // const usercon = useContext(AuthContext)
     const [data, setdata] = useState({})
+
     useEffect(() => {
         // console.log(sessionStorage.getItem('userID').toString())
         async function getuser(){
@@ -16,6 +19,11 @@ export default function Profile() {
             setdata(respData)
         }
         getuser()
+        if(sessionStorage.getItem('userType')&&sessionStorage.getItem('userType')!=='technician'){
+            setisTech(true)
+        }else{
+            setisTech(false)
+        }
     }, [])
     
   return (
@@ -25,7 +33,7 @@ export default function Profile() {
                 <Link className="left" to='/profile/info'>Personal Information</Link>
                 <hr className="line"/>
 
-                <Link className="left" to='/profile/services'>Your Orders</Link>
+                <Link className="left" to='/profile/services'>{(isTech)?'Your Orders':'Service in Queue'}</Link>
                 <hr className="line"/>
             </div>
 

@@ -1,12 +1,45 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import './profile.css'
 import { toast } from "react-toastify";
 
 import AuthContext from '../../context/AuthContext/authContext'
 import { useNavigate } from 'react-router';
 export default function PersonalInfo(props) {
+  
+
   const navigate = useNavigate()
   const userCon = useContext(AuthContext)
+  const [formdata, setformdata] = useState({
+    name:'',
+    email:'',
+    phone:'',
+    address:''
+  })
+
+  async function editInfo(){
+    const resp = await fetch(`http://localhost:4000/auth/${sessionStorage.getItem('userID')}/editinfo`,{
+      method:'PATCH',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify(formdata)
+    })
+    const response  = await resp.json();
+    if(response.msg==='Profile updated'){
+      toast.success(response.msg, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+
+    }
+  }
+
   async function deleteAccount(){
     userCon.deleteAccount(props.id)
     await navigate('/',{redirect:true})
@@ -37,19 +70,16 @@ export default function PersonalInfo(props) {
                     
             <div>
                 <input type="text" placeholder="Enter your name" value={props.name} disabled/>
-                <button className="button">Edit</button>
                 <br/><br/>
                 <input type="email" placeholder="@gmail.com"  value={props.email} disabled/>
-                <button className="button">Edit</button>
                 <br/><br/>
                 <input type="integer" placeholder="+91" value={props.phone}  disabled/>
-                <button className="button">Edit</button>
                 <br/><br/>
                 <input type="address" placeholder="Type your address" value={props.address} disabled/>
-                <button className="button">Edit</button>
             </div>
       </div>
         <div id="button">
+            <button className="delete">Edit</button><br/><br/>
             <button className="delete"><h5>Reset Password</h5></button><br/><br/>
             <button onClick={deleteAccount} className="delete"><h5>Delete Account</h5></button>
         </div>

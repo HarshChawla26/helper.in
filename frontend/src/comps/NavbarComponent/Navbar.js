@@ -7,6 +7,18 @@ import Badge from 'react-bootstrap/Badge'
 // import cartContext from '../../context/CartContext/cartContext';
 export default function Navbar() 
 {
+  const [isTech, setisTech] = useState(sessionStorage.getItem('userType'))
+  function reloadPage(){
+    window.location.reload(false)
+
+  }
+  useEffect(() => {
+    if(sessionStorage.getItem('userType')&&sessionStorage.getItem('userType')!=='technician'){
+      setisTech(true)
+    }else{
+      setisTech(false)
+    }
+  }, [])
   const [CartCount, setCartCount] = useState(0)
   const navigator = useNavigate();
   const userContext = useContext(authContext)
@@ -26,9 +38,9 @@ export default function Navbar()
   }, [CartCount])
   
   
+  
   async function Logout(){
     userContext.userLogout();
-    await navigator('/');
     toast.success("Logout successfull!", {
       position: "bottom-right",
       autoClose: 2000,
@@ -39,6 +51,8 @@ export default function Navbar()
       progress: undefined,
       theme: "colored",
     });
+    reloadPage()
+    navigator('/');
   }
   return (
       <nav className="Navbar p-0 sticky-top">
@@ -48,9 +62,10 @@ export default function Navbar()
             </Link>
           </div>
           <ul className="navbar-links">
-            <li><Link to="/">Home</Link></li>
+            <li><Link  to="/">Home</Link></li>
             {(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')!=='')?
             <>
+            {(isTech)?(
               <li>
                 {
                   (CartCount!==0)?
@@ -61,6 +76,8 @@ export default function Navbar()
                 }
                 <Link to='/cart'>Cart</Link>
               </li>
+            ):(<></>)}
+              
               <li>
                 <Link to='/profile'>My Profile</Link>
               </li>

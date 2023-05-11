@@ -12,12 +12,5 @@ const userSchema = new mongoose.Schema({
     role     :  String
 })
 
-userSchema.pre('save',async function(next){
-    if(this.isModified('pwd')){
-        this.pwd = await bcrypt.hash(this.pwd,10);
-    }
-    next()
-})
-
 const user = mongoose.model('user',userSchema)
 module.exports = user;

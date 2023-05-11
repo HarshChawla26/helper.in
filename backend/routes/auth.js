@@ -1,11 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs')
-const userDB = require('../models/user')
+const userDB = require('../models/user');
+const serviceDB = require('../models/service');
+
+/**
+ * @param {Date} date
+ */
+
+function getSlot(){
+    return Math.floor(Math.random()*10)
+}
+
+function getTimeSlot(){
+    return Math.floor(Math.random()*9)+9;
+}
 
 //Signing up
 router.post('/signup',async (req,res)=>{
-    const {name,email,pwd,phone,address,role} = req.body;
+    const {name,email,pwd,phone,address,role,service} = req.body;
     // let user = null
     try {
         const user = await userDB.find({email});
@@ -13,33 +26,39 @@ router.post('/signup',async (req,res)=>{
 
         const emailString = '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
         // console.log(user)
+        const secpwd = await bcrypt.hash(pwd,10);
         // if(!email.match(emailString)) return res.json({msg:'invalid credentials'});
         if(role==='technician'){
+            const serviceObj = await serviceDB.findOne({name:service})
             const newUser = new userDB({
                 name,
                 email,
-                pwd,
+                pwd:secpwd,
                 phone,
                 services:[],
                 cart:[],
                 role
             });
             newUser.save()
+            serviceObj.execID = newUser._id;
+            serviceObj.save();
+            return res.json({msg:'Technician registered',user: newUser})
         }else{
             const newUser = new userDB({
                 name,
                 email,
-                pwd,
+                pwd:secpwd,
                 phone,
                 address,
                 services:[],
                 role
             });
             newUser.save()
-            res.json({msg:'user registered',id: newUser._id});
+            res.json({msg:'user registered',user: newUser});
         }
 
     } catch (error) {
+        console.log(error)
         return res.json({"msg":"something went wrong"});
     }
 })
@@ -88,7 +107,6 @@ router.delete('/:id/cart/:service',async (req,res)=>{
     res.json({msg:'service deleted'})
 })
 
-//Displays user services
 router.post('/:_id/addServices',async(req,res)=>{
     const {_id} = req.params;
     const {cart} = req.body
@@ -106,15 +124,22 @@ router.patch('/:id/purchase',async(req,res)=>{
     const user = await userDB.findOne({_id:id});
     if(user){
         let arr = user.services;
-        user.cart.map((e)=>{
+        // let d = date.getDate()+3;
+        user.cart.map((e,index)=>{
+            let date = new Date()
+            date.setDate(date.getDate()+getSlot());
+            
+            date.setHours(getTimeSlot())
+            e.date = date.toDateString();
+            e.time = date.toLocaleTimeString()
+            
             arr.push(e)
-
         })
         user.services = arr;
         user.cart = [];
         user.save()
     }
-    res.send(user)
+    res.send({msg:'purchase done'})
 })
 
 // Login API
@@ -129,7 +154,7 @@ router.post('/login',async (req,res)=>{
     if(!isMatch){
         return res.json({msg:'Invalid credentials'})
     }
-    res.status(200).json({user:user._id});
+    res.status(200).json({user:user});
 })
 
 //display personal info of users
@@ -139,7 +164,8 @@ router.get('/:_id',async (req,res)=>{
         _id:1,name:1,
         email:1,
         phone:1,
-        address:1
+        address:1,
+        role:1
     });
     if(!user){
         return res.send({msg:'No user exist'})
@@ -160,6 +186,27 @@ router.get('/:_id/services',async (req,res)=>{
     }catch(error){
         console.log(error)
         return res.json({msg:'something went wrong'})
+    }
+})
+
+//Cancel order
+router.delete('/:_id/service/:serId',async (req,res)=>{
+    const {_id,serId} = req.params;
+    try {
+        
+        const user = await userDB.findOne({_id},{services:1});
+        if(user){
+        let arr = await user.services;
+        arr = await arr.filter((e)=>{
+            return e.id !==serId;
+        })
+        user.services = arr;
+        user.save()
+    }
+    res.json({msg:'service deleted'})
+    } catch (error) {
+     console.log(error)
+     return res.json({msg:'something went wrong'})   
     }
 })
 
@@ -191,4 +238,50 @@ router.patch('/:id',async (req,res)=>{
     }
 })
 
+router.patch('/:_id/changepwd',async (req,res)=>{
+    const {_id} = req.params;
+    const {oldPass,newPass} = req.body;
+    try {
+        const user = await userDB.findOne({_id});
+        const oldCheckHash = await bcrypt.compare(oldPass,user.pwd);
+        if(!oldCheckHash){
+            return res.send({msg:'icorrect old Password'})
+        }
+        const secPass = await bcrypt.hash(newPass,10);
+        user.pwd = secPass;
+        user.save();
+        res.json({msg:'Password changed'})
+    } catch (error) {
+        console.log(error)
+        return res.json({msg:"something went wrong"})
+    }
+})
+
+// updating user Info
+router.patch('/:_id/editinfo',async(req,res)=>{
+    const body = req.body;
+    try{
+    const user = await userDB.findOne({_id:req.params._id});
+        if(user){
+            if(body.name){
+                user.name = body.name;
+            }
+            if(body.email){
+                user.email = body.email;
+                
+            }
+            if(body.phone){
+                user.phone = body.phone;
+            }
+            if(body.address){
+                user.address = body.address;
+            }
+            user.save()
+        }
+        res.send({msg:'Profile updated'})
+    }catch(err){
+        console.log(err)
+        return res.json({msg:'something went wrong'})
+    }
+})
 module.exports = router;

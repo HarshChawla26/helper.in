@@ -7,10 +7,12 @@ const AuthState = (props)=>{
     const [user, setuser] = useState({})
     const nav = useNavigate()
     //Function that logouts the user
-    function userLogout(){
+    async function userLogout(){
         setuser({});
         sessionStorage.setItem('userID','')
-        nav('/',{redirect:true})
+        sessionStorage.setItem('userType','')
+        window.location.reload(false)
+        await nav('/',{redirect:true})
     }
 
     // Function to Login the user with the provided form data
@@ -38,10 +40,12 @@ const AuthState = (props)=>{
         }else{
             await nav('/')
             setuser(respData.user)
-            sessionStorage.setItem('userID',respData.user)
+            window.location.reload(false)
+            sessionStorage.setItem('userID',respData.user._id)
+            sessionStorage.setItem('userType',respData.user.role)
             toast.success("Login successfull!", {
                 position: "bottom-right",
-                autoClose: 2000,
+                acutoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -62,8 +66,9 @@ const AuthState = (props)=>{
         })
         const respData = await resp.json();
         setuser(respData)
-        await console.log(respData)
-        await sessionStorage.setItem('userID',respData.id)
+        window.location.reload(false)
+        await sessionStorage.setItem('userID',respData.user._id)
+        await sessionStorage.setItem('userType',respData.role)
     }
 
     async function deleteAccount(id){

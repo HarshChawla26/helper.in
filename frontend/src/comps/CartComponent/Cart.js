@@ -27,8 +27,9 @@ function Cart() {
         await setcart(respData.cart)
         await amounting(respData.cart)
     }
-    function deleteItem(id){
-        cartcon.deleteFromCart(sessionStorage.getItem('userID'),id)
+    async function deleteItem(id){
+        await cartcon.deleteFromCart(sessionStorage.getItem('userID'),id)
+        await getCartData()
         toast.success("Deleted from Cart", {
             position: "bottom-right",
             autoClose: 2000,

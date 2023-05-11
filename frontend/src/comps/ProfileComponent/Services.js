@@ -4,13 +4,13 @@ import { toast } from 'react-toastify'
 export default function Services() {
   const [data, setdata] = useState([])
 
+  async function getServices(){
+    const resp = await fetch(`http://localhost:4000/auth/${sessionStorage.getItem('userID')}/services`)
+    const respData = await resp.json()
+    await setdata(respData.services)
+    await console.log(data)
+  }
   useEffect(() => {
-    async function getServices(){
-      const resp = await fetch(`http://localhost:4000/auth/${sessionStorage.getItem('userID')}/services`)
-      const respData = await resp.json()
-      await setdata(respData.services)
-      await console.log(data)
-    }
     getServices();
     
      // eslint-disable-next-line
@@ -19,6 +19,7 @@ export default function Services() {
   const cancelOrder = async(id)=>{
     const response = await fetch(`http://localhost:4000/auth/${sessionStorage.getItem('userID')}/service/${id}`,{method:'DELETE'})
     const resp = await response.json()
+    getServices()
     if(resp.msg==='service deleted'){
       toast.success('Service cancelled', {
         position: "bottom-right",

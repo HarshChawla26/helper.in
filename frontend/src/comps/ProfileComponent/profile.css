@@ -1,0 +1,86 @@
+#bar{
+    display: flex;
+    min-height:560px;
+}
+#leftbar{ 
+    width: 20%;
+    padding: 2%;
+    text-align: center;
+    background-color: rgb(210, 202, 202);
+}
+#rightbar{
+    width: 80%;
+    background-color: rgb(225, 218, 218);
+    
+}
+.line{
+    width:100%;
+    height: 1px;
+}
+.left{
+    color:inherit;
+    text-decoration: none;
+    transition: color 0.1s ease-in;
+}
+.left:hover{
+    color:rgb(241, 165, 51)
+}
+#mainbox1{
+    display: flex;
+    margin-left: 8%;
+    margin-top: 8%;
+}
+.service-box{
+    height: 250px;
+    width: 200px;
+    background-color: rgb(204, 198, 198);
+    margin: 3%;
+    margin-top: 0%;
+    box-shadow: 1vh 0.4vw 3.2px 0px grey;
+    border-radius: 2.5%;
+}
+#mainbox2{
+    display: flex;
+    margin-left: 8%;
+    margin-top: 2%;
+}
+.booknow{
+    border: 1px solid black;
+}
+.booknow p{
+    text-align: center;
+    font-size: 20px;
+    color:rgb(15, 12, 12)
+}
+#pinfo{
+    padding-top: 2vh;
+    padding-left: vw;
+    
+}
+.nothing{
+    margin-top:10%;
+    text-align: center;
+}
+h1{
+    padding-left: 24vw;
+}
+
+#pi{
+    padding-top: 5vh;
+    display: flex;
+    justify-content:space-around;
+}
+.button{
+    width: 3.5vw;
+    background-color: rgb(156, 183, 101);
+    border-radius: 50vh;
+}
+#button{
+    padding-top: 6vh;
+    padding-left: 13vw;  
+}
+.delete{
+    height: 5vh;
+    width: 15vw;
+    background-color: rgb(156, 183, 101);
+}

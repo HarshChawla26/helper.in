@@ -6,6 +6,7 @@ import SignUp from "./SignUp";
 
 export default function Auth() {
   return (
+    <div id="wrapper">
     <div className="auth-container">
       <div className="auth-left">
         <Routes>
@@ -16,8 +17,9 @@ export default function Auth() {
       </div>
 
       <div className="auth-right">
-        <img src={require("../../Assets/auth.png")} />
+        <img src={require("../../Assets/auth.png")} alt="Technician.png" />
       </div>
+    </div>
     </div>
   );
 }

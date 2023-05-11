@@ -6,12 +6,12 @@ export default function Contact() {
  
         <div className="container1">
             <div className="form">
-              <h2>Contact Us</h2>
+              <h2>Contact us</h2>
                 <form>
                   <input type="text" name="name" placeholder="Your Name" required></input>
                   <input type="email" name="email" placeholder="Your Email" required></input>
                   <textarea name="message" placeholder="Your Message" required></textarea>
-                  <button type="submit">Send Message</button>
+                  <button type="submit" className='button'>Send Message</button>
                 </form>
             
             <div className="contact-info">

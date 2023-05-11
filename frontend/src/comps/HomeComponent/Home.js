@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import './home.css'
+import Button from 'react-bootstrap/Button'
 import resultcontext from '../../context/resultContext/resultcontext';
 
 export default function Home() {
@@ -9,12 +10,21 @@ export default function Home() {
   const result = useContext(resultcontext);
 
   function handleinput(e){
-    setsearch(e.target.value);
+    setsearch(e.target.value.toLowerCase());
   }
+
+  useEffect(() => {
+    result.fetchcities()
+  }, [result])
+  
   async function handlesearch(e){
     e.preventDefault()
-    result.fetchData(search);
-    navigate('/results')
+    if(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')!==''){
+      result.fetchData(search);
+      navigate(`/results?city=${search}`)
+    }else{
+      navigate('/auth')
+    }
   }
 
   useEffect(() => {
@@ -23,13 +33,18 @@ export default function Home() {
   return (
     <div>
 
-      <div className="container">
+      <div className="mycontainer">
           <h1>NAMASTE</h1>
           <p>Services, on demand</p>
       
       <form >
-        <input type="text" id="search" onChange={handleinput} value={search} placeholder="Search for services"></input>
-        <button onClick={handlesearch} className='btn btn-primary'>Search</button>
+        <select id="search" onChange={handleinput}>
+          <option value='' defaultValue> </option>
+          {result.cities.map((e,index)=>{
+            return <option key={index} value={e}>{e}</option>
+          })}
+        </select>
+        <Button onClick={handlesearch} variant={'dark'} className='button'>Search</Button>
       </form>
       </div>
     </div>

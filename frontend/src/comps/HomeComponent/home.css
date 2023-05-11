@@ -19,8 +19,9 @@ body {
     font-size: 1.5rem;
     font-family: Arial, sans-serif;
   }
-  p{
+  .mycontainer p{
     font-size:1rem;
+    color: white;
     /* border: 1px solid black; */
     padding:0;
     margin:1 px;
@@ -39,7 +40,9 @@ body {
     outline: none;
 }
 
-.button{
+#home-search-button{
   width:370px;
-  
+}
+#namaste-h1{
+  padding: auto;
 }

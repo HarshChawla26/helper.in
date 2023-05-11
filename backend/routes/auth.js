@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs')
 const userDB = require('../models/user');
 const serviceDB = require('../models/service');
+const user = require('../models/user');
 
 /**
  * @param {Date} date
@@ -28,6 +29,7 @@ router.post('/signup',async (req,res)=>{
         // console.log(user)
         const secpwd = await bcrypt.hash(pwd,10);
         // if(!email.match(emailString)) return res.json({msg:'invalid credentials'});
+        console.log(service)
         if(role==='technician'){
             const serviceObj = await serviceDB.findOne({name:service})
             const newUser = new userDB({
@@ -35,14 +37,16 @@ router.post('/signup',async (req,res)=>{
                 email,
                 pwd:secpwd,
                 phone,
+                address,
                 services:[],
                 cart:[],
                 role
             });
-            newUser.save()
-            serviceObj.execID = newUser._id;
-            serviceObj.save();
-            return res.json({msg:'Technician registered',user: newUser})
+            await newUser.save()
+            console.log(newUser._id.toString())
+            serviceObj.execID = await newUser._id.toString();
+            await serviceObj.save();
+            return res.json({msg:'Technician registered',user: newUser,serviceObj})
         }else{
             const newUser = new userDB({
                 name,
@@ -131,8 +135,8 @@ router.patch('/:id/purchase',async(req,res)=>{
             
             date.setHours(getTimeSlot())
             e.date = date.toDateString();
-            e.time = date.toLocaleTimeString()
-            
+            e.time = `${date.getHours()}:00 ${(date.getHours()<=12)?'AM':'PM'}`
+            e.status = 'Booked'
             arr.push(e)
         })
         user.services = arr;
@@ -284,4 +288,32 @@ router.patch('/:_id/editinfo',async(req,res)=>{
         return res.json({msg:'something went wrong'})
     }
 })
+
+router.get('/services/:servid',async(req,res)=>{
+    const {_id,servid} = req.params;
+    try {
+        
+        const users = await userDB.find({});
+        let arr = []
+        const service = await serviceDB.findOne({_id:servid})
+    if(users){
+        await users.map((user)=>{
+            user.services.map((e)=>{
+                arr.push(e);
+            })  
+        })
+        let filteredArr = await arr.filter((service)=>{
+            return service.id === servid;
+        })
+        const us = await userDB.findOne({_id:service.execID})
+        us.services = filteredArr;
+        us.save();
+    }
+    res.send({msg:'done'})
+    } catch (error) {
+        console.log(error);
+        res.send({msg:'something went wrong'})   
+    }
+})
+
 module.exports = router;

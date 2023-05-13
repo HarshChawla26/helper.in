@@ -36,14 +36,21 @@
 }
 .service-box{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 300px;
-    width: 225px;
+    height: 450px;
+    width: 350px;
     background-color: #a4a4a4;
     color: black;
     margin: 25px;
     border-radius: 10px;
+}
+.service-box-img{
+    border-radius: 18px;
+    margin: 10px auto;
+    width: 200px;
+    height: 33%;
 }
 #mainbox2{
     display: flex;
@@ -68,11 +75,11 @@
     border: 1px dotted rgb(141, 141, 141);
 }
 .delete-btn-sc{
-    margin-top: 20px;
+    margin-top: 5px;
     border-radius: 10px;
     background-color: red;
     padding: 2px;
-    width: 90px;
+    width: 65%;
     font-size: 1.1rem;
     color: #222831;
     border: none;

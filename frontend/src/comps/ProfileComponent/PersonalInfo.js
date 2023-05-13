@@ -1,32 +1,33 @@
-import React, { useContext, useState } from 'react'
-import './profile.css'
+import React, { useContext, useState } from "react";
+import "./profile.css";
 import { toast } from "react-toastify";
-import Resetpop from './Resetpass.js';
-import EditData from './Edit';
-import AuthContext from '../../context/AuthContext/authContext'
-import { useNavigate } from 'react-router';
+import Resetpop from "./Resetpass.js";
+import EditData from "./Edit";
+import AuthContext from "../../context/AuthContext/authContext";
+import { useNavigate } from "react-router";
 export default function PersonalInfo(props) {
-  
-
-  const navigate = useNavigate()
-  const userCon = useContext(AuthContext)
+  const navigate = useNavigate();
+  const userCon = useContext(AuthContext);
   const [formdata, setformdata] = useState({
-    name:'',
-    email:'',
-    phone:'',
-    address:''
-  })
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+  });
 
-  async function editInfo(){
-    const resp = await fetch(`http://localhost:4000/auth/${sessionStorage.getItem('userID')}/editinfo`,{
-      method:'PATCH',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify(formdata)
-    })
-    const response  = await resp.json();
-    if(response.msg==='Profile updated'){
+  async function editInfo() {
+    const resp = await fetch(
+      `http://localhost:4000/auth/${sessionStorage.getItem("userID")}/editinfo`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formdata),
+      }
+    );
+    const response = await resp.json();
+    if (response.msg === "Profile updated") {
       toast.success(response.msg, {
         position: "bottom-right",
         autoClose: 2000,
@@ -37,13 +38,12 @@ export default function PersonalInfo(props) {
         progress: undefined,
         theme: "colored",
       });
-
     }
   }
 
-  async function deleteAccount(){
-    userCon.deleteAccount(props.id)
-    await navigate('/',{redirect:true})
+  async function deleteAccount() {
+    userCon.deleteAccount(props.id);
+    await navigate("/", { redirect: true });
     toast.success("Account deleted", {
       position: "bottom-right",
       autoClose: 2000,
@@ -55,32 +55,40 @@ export default function PersonalInfo(props) {
       theme: "colored",
     });
   }
-   const [showModalReset, setShowModalReset] = useState(false);
+  const [showModalReset, setShowModalReset] = useState(false);
 
-   const ResetModalOpen = () => {
-     setShowModalReset(true);
-   };
+  const ResetModalOpen = () => {
+    setShowModalReset(true);
+  };
 
-   const ResetModalClose = () => {
+  const ResetModalClose = () => {
     // console.log("called");
-     setShowModalReset(false);
-   };
+    setShowModalReset(false);
+  };
 
-   const [showModalEdit, setShowModalEdit] = useState(false);
+  const [showModalEdit, setShowModalEdit] = useState(false);
 
-   const editModalOpen = () => {
-     setShowModalEdit(true);
-   };
+  const editModalOpen = () => {
+    setShowModalEdit(true);
+  };
 
-   const editModalClose = () => {
-     // console.log("called");
-     setShowModalEdit(false);
-   };
+  const editModalClose = () => {
+    // console.log("called");
+    setShowModalEdit(false);
+  };
 
   return (
     <div id="pinfo">
       {showModalReset && <Resetpop handleMChange={ResetModalClose} />}
-      {showModalEdit && <EditData handleMChange={editModalClose} />}
+      {showModalEdit && (
+        <EditData
+          handleMChange={editModalClose}
+          name={props.name}
+          email={props.email}
+          phone={props.phone}
+          address={props.address}
+        />
+      )}
       <h1>Personal Information</h1>
       <div id="pi">
         <div>
@@ -127,7 +135,9 @@ export default function PersonalInfo(props) {
         </div>
       </div>
       <div id="buttons">
-        <button className="delete-p" onClick={editModalOpen}>Edit</button>
+        <button className="delete-p" onClick={editModalOpen}>
+          Edit
+        </button>
         <br />
         <br />
         <button className="delete-p" onClick={ResetModalOpen}>

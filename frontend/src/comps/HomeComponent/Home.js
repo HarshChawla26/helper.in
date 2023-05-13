@@ -38,9 +38,9 @@ export default function Home() {
           <h1 id='namaste-h1'>NAMASTE</h1>
           <p>Services, on demand</p>
         </center>
-      <form >
-        <select id="search" onChange={handleinput}>
-          <option value='' defaultValue> </option>
+      <form>
+        <select id="search"  onChange={handleinput}>
+          <option value='' defaultValue> Search for city </option>
           {result.cities.map((e,index)=>{
             return <option key={index} value={e}>{e}</option>
           })}

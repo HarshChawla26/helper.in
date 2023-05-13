@@ -90,8 +90,8 @@ function Cart() {
                 return (
                   <div key={index} className="box-c" id="item-card">
                     {/* <div className="innerbox-c"> */}
-                      {/* eslint-disable-next-line*/}
-                      <img id="cart-img" src={ele.img} alt="image" />
+                    {/* eslint-disable-next-line*/}
+                    <img id="cart-img" src={ele.img} alt="image" />
                     {/* </div> */}
                     <div className="desc-c">
                       <div>
@@ -118,7 +118,17 @@ function Cart() {
                 );
               })
             ) : (
-              <div>No items to show</div>
+              <div className="empty-01">
+                No items to show
+                <br></br>
+                <br></br>
+                <img
+                  width={"200px"}
+                  height={"200px"}
+                  src={require("../../Assets/shopping-cart.png")}
+                  alt="Technician.png"
+                />
+              </div>
             )}
           </div>
           <div id="amount-area">

@@ -54,15 +54,25 @@ export default function Services() {
         // console.log(e)
         return (
           <div className="service-box">
-            {/* <img src={e.img} height="50vh" width="100vw"/> */}
+            <img src={e.img} className='service-box-img'/>
             <div className="booknow">
               <h4>Sevice Details</h4>
               <table>
-                <tr><td>{e.price}</td></tr>
-                <tr><td>{e.name}</td></tr>
-                <tr><td>{e.date}</td></tr>
-                <tr><td>{e.time}</td></tr>
-                <tr><td>{e.status}</td></tr>
+                <tr>
+                  <td>₹ {e.price}</td>
+                </tr>
+                <tr>
+                  <td>{e.name}</td>
+                </tr>
+                <tr>
+                  <td>{e.date}</td>
+                </tr>
+                <tr>
+                  <td>{e.time}</td>
+                </tr>
+                <tr>
+                  <td>{e.status}</td>
+                </tr>
               </table>
               <button
                 onClick={() => {

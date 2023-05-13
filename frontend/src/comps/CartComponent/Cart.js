@@ -94,12 +94,12 @@ function Cart() {
                     <img id="cart-img" src={ele.img} alt="image" />
                     {/* </div> */}
                     <div className="desc-c">
-                      <div>
+                      {/* <div> */}
                         <p className="desc-in-c">{ele.name}</p>
                         {/* <TimePicker.RangePicker name='timePicker' onChange={(e)=>{handleSlotinput(e,'time',ele.id)}}></TimePicker.RangePicker>
                                             <DatePicker  name='datePicker' onChange={(e)=>{handleSlotinput(e,'date',ele.id)}} ></DatePicker>
                                             <Button className='delete-btn' onClick={handleSlot} variant='primary'>Check availability</Button> */}
-                      </div>
+                      {/* </div> */}
 
                       <div>
                         <span>₹ {ele.price}</span>

@@ -2,12 +2,13 @@
     width:100%;
     min-height:50vh;
     padding-top:2%;
-    background-color:lightgray;
+    background-color:#222831;
 }
 .wrapper label{
     margin-left: 10%;
     font-family: Poppins;
     font-size: 20px;
+    color: aliceblue;
 }
 .wrapper #search{
     margin-bottom:4%;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 import { toast } from 'react-toastify'
 export default function Services() {
   const [data, setdata] = useState([])
@@ -37,8 +37,16 @@ export default function Services() {
   
   if(data&&data.length===0){
     return (
-      <h2 className='nothing'>Nothing to show</h2>
-    )
+      <div className="empty-01">
+        <h2>Nothing to show</h2>
+        <img
+          width={"200px"}
+          height={"200px"}
+          src={require("../../Assets/shopping-cart.png")}
+          alt="Technician.png"
+        />
+      </div>
+    );
   }
   return (
     <div id="mainbox1">
@@ -46,17 +54,28 @@ export default function Services() {
         // console.log(e)
         return (
           <div className="service-box">
-                  {/* <img src="booknow.jpg" height="50vh" width="100vw"/> */}
-              <div className="booknow">
-                  <p>{e.name}</p>
-                  <p>{e.price}</p>
-                  <p>{e.date}</p>
-                  <p>{e.time}</p>
-                  <p>{e.status}</p>
-                  <Button onClick={()=>{cancelOrder(e.id)}} className='delete-btn' variant='danger'> Cancel </Button>
-              </div>
+            {/* <img src={e.img} height="50vh" width="100vw"/> */}
+            <div className="booknow">
+              <h4>Sevice Details</h4>
+              <table>
+                <tr><td>{e.price}</td></tr>
+                <tr><td>{e.name}</td></tr>
+                <tr><td>{e.date}</td></tr>
+                <tr><td>{e.time}</td></tr>
+                <tr><td>{e.status}</td></tr>
+              </table>
+              <button
+                onClick={() => {
+                  cancelOrder(e.id);
+                }}
+                className="delete-btn-sc"
+              >
+                {" "}
+                Cancel{" "}
+              </button>
+            </div>
           </div>
-        )
+        );
       })}
           
       </div>

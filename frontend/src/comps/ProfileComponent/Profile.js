@@ -28,24 +28,39 @@ export default function Profile() {
     
   return (
     <div>
-        <div id="bar">
-            <div id="leftbar">
-                <Link className="left" to='/profile/info'>Personal Information</Link>
-                <hr className="line"/>
+      <div id="bar">
+        <div id="leftbar">
+          <Link className="left" to="/profile/info">
+            Personal Information
+          </Link>
+          <hr className="line" />
 
-                <Link className="left" to='/profile/services'>{(!isTech)?'Your Orders':'Service in Queue'}</Link>
-                <hr className="line"/>
-            </div>
-
-            <div id="rightbar">
-                <Routes>
-                    <Route path='/info' element={<PersonalInfo key={data._id} id={data._id} name={data.name} email={data.email} phone={data.phone} address={data.address} />}></Route>
-                    <Route path='/services' element={<Services/>}></Route>
-                    <Route path='*' element={<Navigate to='./info'/>}></Route>
-                </Routes>
-            </div>
+          <Link className="left" to="/profile/services">
+            {!isTech ? "Your Orders" : "Service in Queue"}
+          </Link>
+          <hr className="line" />
         </div>
-    </div>
 
-  )
+        <div id="rightbar">
+          <Routes>
+            <Route
+              path="/info"
+              element={
+                <PersonalInfo
+                  key={data._id}
+                  id={data._id}
+                  name={data.name}
+                  email={data.email}
+                  phone={data.phone}
+                  address={data.address}
+                />
+              }
+            ></Route>
+            <Route path="/services" element={<Services />}></Route>
+            <Route path="*" element={<Navigate to="./info" />}></Route>
+          </Routes>
+        </div>
+      </div>
+    </div>
+  );
 }

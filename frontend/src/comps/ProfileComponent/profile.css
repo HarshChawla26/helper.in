@@ -29,17 +29,21 @@
 }
 #mainbox1{
     display: flex;
-    margin-left: 8%;
-    margin-top: 8%;
+    flex-wrap: wrap;
+    padding: 40px;
+    height: 100%;
+    background-color: #222831;
 }
 .service-box{
-    height: 250px;
-    width: 200px;
-    background-color: rgb(204, 198, 198);
-    margin: 3%;
-    margin-top: 0%;
-    box-shadow: 1vh 0.4vw 3.2px 0px grey;
-    border-radius: 2.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 225px;
+    background-color: #a4a4a4;
+    color: black;
+    margin: 25px;
+    border-radius: 10px;
 }
 #mainbox2{
     display: flex;
@@ -47,12 +51,40 @@
     margin-top: 2%;
 }
 .booknow{
-    border: 1px solid black;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-.booknow p{
-    text-align: center;
-    font-size: 20px;
-    color:rgb(15, 12, 12)
+.booknow table{
+    width: 200px;
+}
+.booknow tr{
+    border: none;
+    padding: 5px;
+    font-size: 1.2rem;
+    color:rgb(15, 12, 12);
+    border: 1px dotted rgb(141, 141, 141);
+}
+.delete-btn-sc{
+    margin-top: 20px;
+    border-radius: 10px;
+    background-color: red;
+    padding: 2px;
+    width: 90px;
+    font-size: 1.1rem;
+    color: #222831;
+    border: none;
+}
+.empty-01{
+    background-color: #222831;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    color: white;
 }
 #pinfo{
     background-color: #222831;
@@ -60,9 +92,7 @@
     height: 100%;
     color: white;
     /* padding-top: 2vh; */
-    /* padding-left: vw; */
-
-    
+    /* padding-left: vw; */    
 }
 .nothing{
     margin-top:10%;
@@ -108,4 +138,76 @@
 }
 .del-p-d{
     background-color: red;
+}
+
+/* model */
+.reset-pass-p-c{
+    margin: auto;
+    display: flex;
+    padding: 12px;
+    justify-content: center;
+    position: relative;
+    width: 350px;
+    background-color: #eaeaea;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.2),
+    inset 0px 0px 20px rgba(255,255,255,0.5),
+    inset 0px 0px 20px rgba(0,0,0,0.1);
+}
+#cl-pop{
+    border: none;
+    background-color: transparent;
+    font-size: 30px;
+    cursor: pointer;
+    color: #555;
+    transition: all 0.3s ease-in-out;
+    display: inline;
+    position: absolute;
+    top: 0;
+    right: 5px;
+}
+#cl-pop:hover{
+    color: red;
+}
+.up-btn-pop{
+    width: 80px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+.modal-r {
+  font-size: 1.1rem;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+.mdre input{
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+.edit-data-p-c{
+    margin: auto;
+    display: flex;
+    padding: 12px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 400px;
+    height: 5   00px;
+    background-color: #eaeaea;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.2),
+    inset 0px 0px 20px rgba(255,255,255,0.5),
+    inset 0px 0px 20px rgba(0,0,0,0.1);
+}
+.mdre td{
+    color: black;
+    padding: 9px;
 }

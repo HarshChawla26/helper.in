@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 .mycontainer {
     display: flex;
     flex-direction:column;
@@ -36,7 +37,10 @@ body {
     border: none;
     height: 38px;
     width: 370px;
-    font-size: 15px;
+    font-size: 12px;
+    letter-spacing: 1.4px;
+    
+    color: #848884;
     outline: none;
 }
 

@@ -54,7 +54,7 @@ export default function Services() {
         // console.log(e)
         return (
           <div className="service-box">
-            <img src={e.img} className='service-box-img'/>
+            <img src={e.img} className='service-box-img' alt='src'/>
             <div className="booknow">
               <h4>Sevice Details</h4>
               <table>

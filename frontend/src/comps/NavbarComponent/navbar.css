@@ -54,7 +54,9 @@ li:hover{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #000000;
+  background-color: #191919;
+  z-index: 4;
+  
 }
 #website-name {
   font-size: 35px;
@@ -80,3 +82,14 @@ li:hover{
   align-items: center;
   margin-right: 20px;
 }
+@media screen and (max-width:768px) {
+  .navbar-links{
+    width:50%
+  }
+}
+@media screen and (max-width:425px) {
+  .navbar-links{
+    width:70%
+  }
+}
+

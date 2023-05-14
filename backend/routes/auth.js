@@ -29,8 +29,8 @@ router.post('/signup',async (req,res)=>{
         // console.log(user)
         const secpwd = await bcrypt.hash(pwd,10);
         // if(!email.match(emailString)) return res.json({msg:'invalid credentials'});
-        console.log(service)
         if(role==='technician'){
+            console.log(service)
             const serviceObj = await serviceDB.findOne({name:service})
             const newUser = new userDB({
                 name,
@@ -42,9 +42,8 @@ router.post('/signup',async (req,res)=>{
                 cart:[],
                 role
             });
-            await newUser.save()
-            console.log(newUser._id.toString())
             serviceObj.execID = await newUser._id.toString();
+            await newUser.save()
             await serviceObj.save();
             return res.json({msg:'Technician registered',user: newUser,serviceObj})
         }else{
@@ -129,15 +128,24 @@ router.patch('/:id/purchase',async(req,res)=>{
     if(user){
         let arr = user.services;
         // let d = date.getDate()+3;
-        user.cart.map((e,index)=>{
+        user.cart.map(async(e,index)=>{
             let date = new Date()
-            date.setDate(date.getDate()+getSlot());
+            date.setDate(date.getDate()+getSlot())
             
             date.setHours(getTimeSlot())
             e.date = date.toDateString();
-            e.time = `${date.getHours()}:00 ${(date.getHours()<=12)?'AM':'PM'}`
+            e.time = `${date.getHours()}:00 ${(date.getHours()<12)?'AM':'PM'}`
             e.status = 'Booked'
             arr.push(e)
+        })
+        arr.map(async(e)=>{
+            const service = await serviceDB.findOne({name:e.name})
+            if(service){
+                // console.log(service.execID)
+                const serviceMan = await userDB.findOne({_id:service.execID})
+                serviceMan.services = arr;
+                serviceMan.save()
+            }
         })
         user.services = arr;
         user.cart = [];
@@ -249,7 +257,7 @@ router.patch('/:_id/changepwd',async (req,res)=>{
         const user = await userDB.findOne({_id});
         const oldCheckHash = await bcrypt.compare(oldPass,user.pwd);
         if(!oldCheckHash){
-            return res.send({msg:'icorrect old Password'})
+            return res.send({msg:'incorrect old Password'})
         }
         const secPass = await bcrypt.hash(newPass,10);
         user.pwd = secPass;
@@ -282,7 +290,7 @@ router.patch('/:_id/editinfo',async(req,res)=>{
             }
             user.save()
         }
-        res.send({msg:'Profile updated'})
+        res.status(200).send({msg:'Profile updated'})
     }catch(err){
         console.log(err)
         return res.json({msg:'something went wrong'})

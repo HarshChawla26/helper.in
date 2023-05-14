@@ -1,23 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import "./profile.css";
+import { toast } from "react-toastify";
 
 export default function EditData(props) {
-  const [name, setName] = React.useState(props.name);
-  const [email, setEmail] = React.useState(props.email);
-  const [phone, setPhone] = React.useState(props.phone);
-  const [address, setAddress] = React.useState(props.address);
-  function handleChange1(e) {
-    setName(e.value);
+  const [formData, setformData] = useState({
+    name:props.name,
+    email:props.email,
+    phone:props.phone,
+    address:props.address
+  })
+  
+  function handleChange(e) {
+    const {name,value} = e.target;
+    setformData({...formData,[name]:value})
   }
-  function handleChange2(e) {
-    setEmail(e.value);
+
+  async function handleupdate(e){
+    e.preventDefault()
+    const resp = await fetch(`http://localhost:4000/auth/${sessionStorage.getItem('userID')}/editinfo`,{
+      method:'PATCH',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify(formData)
+    })
+
+    const respData = await resp.json()
+    if(respData.msg==='Profile updated'){
+      window.location.reload(false)
+      toast.success(respData.msg,{
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      })
+      return;
+    }
+    toast.error(respData.msg,{
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    })
   }
-  function handleChange3(e) {
-    setPhone(e.value);
-  }
-  function handleChange4(e) {
-    setAddress(e.value);
-  }
+
+
   return (
     <div className="modal-r mdre">
       <div className="edit-data-p-c">
@@ -26,13 +61,16 @@ export default function EditData(props) {
             &times;
           </button>
           <table>
+            <tbody>
+
             <tr>
               <td>Name</td>
               <td>
                 <input
                   type="text"
-                  value={name}
-                  onChange={handleChange1}
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                 ></input>
               </td>
             </tr>
@@ -41,8 +79,9 @@ export default function EditData(props) {
               <td>
                 <input
                   type="email"
-                  value={email}
-                  onChange={handleChange2}
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                 ></input>
               </td>
             </tr>
@@ -51,8 +90,9 @@ export default function EditData(props) {
               <td>
                 <input
                   type="integer"
-                  value={phone}
-                  onChange={handleChange3}
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
                 ></input>
               </td>
             </tr>
@@ -61,13 +101,15 @@ export default function EditData(props) {
               <td>
                 <input
                   type="address"
-                  value={address}
-                  onChange={handleChange4}
-                ></input>
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  ></input>
               </td>
             </tr>
+            </tbody>
           </table>
-          <button className="up-btn-pop">Update</button>
+          <button onClick={handleupdate} className="up-btn-pop">Update</button>
         </form>
       </div>
     </div>

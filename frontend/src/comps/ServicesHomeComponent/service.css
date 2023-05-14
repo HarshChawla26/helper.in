@@ -26,9 +26,14 @@ section > div {
   text-align: center;
 }
 .serc-img-00{
-  width: 24%;
+  margin: 3%;
+  min-width: 100px;
+  max-width: 300px;
   transition: transform 2s cubic-bezier(0.4, 0.3, 0.2, 0.1);
   will-change: transform;
+}
+.serc-img-01,.serc-img-02,.serc-img-03,.serc-img-04{
+  transition:all 0.2s ease-in;
 }
 .serc-img-01:hover{
   transform: scale(1.15);
@@ -80,4 +85,15 @@ p {
 }
 .card:hover p {
   color: #f0f0f0;
+}
+
+@media screen and (max-width:425px) {
+  
+.serc-img-00{
+  margin: 3%;
+  width: 350px;
+  /* max-width: 300px; */
+  transition: transform 2s cubic-bezier(0.4, 0.3, 0.2, 0.1);
+  will-change: transform;
+}
 }

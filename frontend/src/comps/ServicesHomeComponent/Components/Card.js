@@ -1,5 +1,5 @@
 import React from "react";
-
+import './../service.css'
 export default function Card(props) {
   return (
     <div className="row serc-img-00">

@@ -8,42 +8,12 @@ import { useNavigate } from "react-router";
 export default function PersonalInfo(props) {
   const navigate = useNavigate();
   const userCon = useContext(AuthContext);
-  const [formdata, setformdata] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-  });
-
-  async function editInfo() {
-    const resp = await fetch(
-      `http://localhost:4000/auth/${sessionStorage.getItem("userID")}/editinfo`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formdata),
-      }
-    );
-    const response = await resp.json();
-    if (response.msg === "Profile updated") {
-      toast.success(response.msg, {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
-  }
+  
 
   async function deleteAccount() {
     userCon.deleteAccount(props.id);
     await navigate("/", { redirect: true });
+    window.location.reload(false)
     toast.success("Account deleted", {
       position: "bottom-right",
       autoClose: 2000,
@@ -150,7 +120,7 @@ export default function PersonalInfo(props) {
           className="delete-p del-p-d"
           variant="danger"
         >
-          <h5>Delete Account</h5>
+          Delete Account
         </button>
       </div>
     </div>

@@ -171,11 +171,11 @@ export default function SignUp() {
         </div>
       </form>
 
-      <div>
+      <div id="signup-div">
         <h1> </h1>
-        <p className="sm-p" style={{ display: "inline-block" }}>
+        <span className="sm-p" style={{ display: "inline-block" }}>
           Already have a account?
-        </p>{" "}
+        </span>{" "}
         <Link to="/auth/login">Login?</Link>
       </div>
     </div>

@@ -8,7 +8,7 @@
 
 h2~p{
     padding-left: 1%;
-    color:rgb(255, 191, 0)
+    /* color:rgb(255, 191, 0) */
 }
 
 form{
@@ -23,7 +23,7 @@ form{
     gap: 40px;
 }
 #auth-btn{
-    height:20px;
+    /* height:20px; */
 }
 /* form input,form select{
     width: 100%;
@@ -45,6 +45,7 @@ form select{
 }
 form div{
     position: relative;
+    flex-wrap: wrap;
     display: flex;
     align-items: center;
 }
@@ -70,4 +71,34 @@ Link{
 }
 .login-h2{
     color: rgb(255, 191, 0);
+}
+@media screen and (max-width:425px) {
+    .formInput{
+        margin-top:5% !important;
+        width:85%;
+        margin: auto;
+    }
+    
+    select[name='service'],small{
+        margin: auto;
+        width: 85%;
+    }
+    .login-h2~p{
+        font-size:10px;
+        margin-top: 2%;
+    }
+    
+    form div input[name="phone"]{
+        width: 100%;
+    }
+    
+    form select{
+        width: 100%;
+        margin-top: 4%;
+    }
+    .login-h2{
+        text-align: center;
+        margin-top: 5%;
+        font-size: 23px;
+    }   
 }

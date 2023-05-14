@@ -88,7 +88,7 @@ export default function Navbar()
             )}
 
             <li>
-              <Link to="/profile">My Profile</Link>
+              <Link to="/profile">Profile</Link>
             </li>
             <li>
               <Link onClick={Logout}>Logout</Link>

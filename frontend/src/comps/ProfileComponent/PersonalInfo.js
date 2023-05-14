@@ -151,7 +151,7 @@ export default function PersonalInfo(props) {
           className="delete-p del-p-d"
           variant="danger"
         >
-          <h5>Delete Account</h5>
+          Delete Account
         </button>
       </div>
     </div>

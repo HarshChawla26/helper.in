@@ -35,7 +35,7 @@ export default function Contact() {
                   </div>
                   <a href='' className='Cont-btn'>Learn More</a>
                 </div> 
-                <div className='Cont-flex'>
+                <div className='Cont-flex cont-flex-img'>
                     <img src={helper}></img>
                 </div>
               </div>

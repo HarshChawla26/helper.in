@@ -140,3 +140,24 @@
     width:100px;
 }
 
+@media screen and (max-width:425px) {
+    #cart-container{
+        padding:0;
+    }
+    #all-area{
+        margin:0px
+    }
+    #cart-area{
+        width:65%;
+        height: 400px;
+        margin-left:0%;
+    }
+    
+    #item-card{
+        margin-top:20%;
+        width:95%;
+        height:120px;
+        font-size: 13px;
+    }
+    
+}

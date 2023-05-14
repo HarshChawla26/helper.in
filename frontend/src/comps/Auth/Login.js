@@ -36,7 +36,7 @@ export default function Login() {
         <form id="loginform">
 
           <Form.Group className="formInput">
-            <Form.Label className="p">Enter Email</Form.Label>
+            <Form.Label className="p"  required>Enter Email</Form.Label>
             <Form.Control
               onChange={handleinput}
               required
@@ -47,7 +47,7 @@ export default function Login() {
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
           <Form.Group className="formInput">
-            <Form.Label className="p"> Enter Password </Form.Label>
+            <Form.Label className="p" required> Enter Password </Form.Label>
             <Form.Control
               onChange={handleinput}
               required

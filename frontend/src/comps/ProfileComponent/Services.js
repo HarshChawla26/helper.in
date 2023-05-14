@@ -59,18 +59,23 @@ export default function Services() {
               <h4>Sevice Details</h4>
               <table>
                 <tr>
+                  <td>Price :</td>
                   <td>₹ {e.price}</td>
                 </tr>
                 <tr>
+                  <td>Name :</td>
                   <td>{e.name}</td>
                 </tr>
                 <tr>
+                  <td>Date : </td>
                   <td>{e.date}</td>
                 </tr>
                 <tr>
+                  <td>Time :</td>
                   <td>{e.time}</td>
                 </tr>
                 <tr>
+                  <td>Status :</td>
                   <td>{e.status}</td>
                 </tr>
               </table>

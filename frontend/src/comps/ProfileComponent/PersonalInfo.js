@@ -44,6 +44,7 @@ export default function PersonalInfo(props) {
   async function deleteAccount() {
     userCon.deleteAccount(props.id);
     await navigate("/", { redirect: true });
+    window.location.reload(false)
     toast.success("Account deleted", {
       position: "bottom-right",
       autoClose: 2000,

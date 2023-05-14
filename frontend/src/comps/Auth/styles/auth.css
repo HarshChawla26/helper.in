@@ -7,6 +7,10 @@
     min-height: 100vh;
     /* margin-top: -65px; */
 }
+label[required]:after,p[required]:after,select[required]:after{
+    content:'*';
+    color:rgb(255, 154, 154);
+}
 .auth-container{
     overflow-x: hidden !important;
     width: 75%;

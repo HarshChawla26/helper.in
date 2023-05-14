@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './result.css'
 import { useNavigate } from 'react-router'
 import Button from 'react-bootstrap/Button'
@@ -20,9 +20,10 @@ function ResultCard(props) {
         navigate('/auth',{redirect:true});
         return;
       }
-          
+      
+      
       cart.addtocart(sessionStorage.getItem('userID'),props);
-        toast.success("Added to Cart", {
+      toast.success("Added to Cart", {
           position: "bottom-right",
           autoClose: 2000,
           hideProgressBar: false,
@@ -32,7 +33,7 @@ function ResultCard(props) {
           progress: undefined,
           theme: "colored",
         });
-    }
+      }
 
   return (
     <div className="box-r">

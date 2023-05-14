@@ -44,11 +44,11 @@
     align-items: center;
     margin: 20px;
 }
-.innerbox-c{
+/* .innerbox-c{
 
-}
+} */
 #item-card{
-    justify-content:space-around;
+    justify-content:flex-start;
     color:gray;
     box-shadow: none;
     background-color: gray;
@@ -61,10 +61,11 @@
 }
 .desc-c{
     /* margin-left:-20% ; */
+    padding: 12px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
 }
 .delete-btn-c{
     margin-left: 30px;

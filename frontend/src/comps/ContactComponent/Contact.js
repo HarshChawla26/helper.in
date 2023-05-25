@@ -33,10 +33,10 @@ export default function Contact() {
                   <div className='Cont-social-links'>
 
                   </div>
-                  <a href='' className='Cont-btn'>Learn More</a>
+                  <a href='/' className='Cont-btn'>Learn More</a>
                 </div> 
-                <div className='Cont-flex'>
-                    <img src={helper}></img>
+                <div className='Cont-flex cont-flex-img'>
+                    <img src={helper} alt='helpr'></img>
                 </div>
               </div>
             </div>

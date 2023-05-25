@@ -38,6 +38,7 @@ const AuthState = (props)=>{
               })
             return;
         }else{
+            console.log(respData)
             await nav('/')
             setuser(respData.user)
             window.location.reload(false)
@@ -80,7 +81,7 @@ const AuthState = (props)=>{
             setuser(respData.user)
             window.location.reload(false)
             sessionStorage.setItem('userID',respData.user._id)
-            sessionStorage.setItem('userType',respData.role)
+            sessionStorage.setItem('userType',respData.user.role)
         }
     }
 

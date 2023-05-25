@@ -22,6 +22,7 @@ export default function Results() {
         // eslint-disable-next-line
     }, [sessionStorage.getItem('location')])
 
+
     // useEffect(() => {
     //     if(!sessionStorage.getItem('location')){
     //         sessionStorage   

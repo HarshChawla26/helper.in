@@ -44,7 +44,7 @@ export default function SignUp() {
     phone: "",
     address: "",
     role: "",
-    service:""
+    service:"none"
     })
     function handleinput(e){
       const name=e.target.name;
@@ -55,10 +55,24 @@ export default function SignUp() {
         e.target.value = e.target.value.replace(num,"");
       }
 
-      setformData(val=>({...val,[name]:value}))
+      setformData({...formData,[name]:value})
     }
     async function signupHandler(e){
       e.preventDefault()
+      if(!formData.name||!formData.email||!formData.pwd||!formData.phone||!formData.address||!formData.role||!formData.service){
+        toast.error('Information not complete',{
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        })
+        return;
+      }
+      console.log(formData)
       await auth.userSignup(formData)
       
       if(sessionStorage.getItem('location')&&sessionStorage.getItem('location')!==''){
@@ -75,7 +89,7 @@ export default function SignUp() {
 
       <form id="signupform">
         <Form.Group className="formInput">
-          <Form.Label className="p"> Enter Full Name </Form.Label>
+          <Form.Label className="p" required> Enter Full Name </Form.Label>
           <Form.Control
             onChange={handleinput}
             required
@@ -86,7 +100,7 @@ export default function SignUp() {
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="formInput">
-          <Form.Label className="p">Enter Email</Form.Label>
+          <Form.Label className="p" required>Enter Email</Form.Label>
           <Form.Control
             onChange={handleinput}
             required
@@ -97,7 +111,7 @@ export default function SignUp() {
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="formInput">
-          <Form.Label className="p"> Enter Password </Form.Label>
+          <Form.Label className="p" required> Enter Password </Form.Label>
           <Form.Control
             onChange={handleinput}
             required
@@ -109,7 +123,7 @@ export default function SignUp() {
         </Form.Group>
         <div>
           <Form.Group className="formInput">
-            <Form.Label className="p"> Enter Phone Number </Form.Label>
+            <Form.Label className="p" required> Enter Phone Number </Form.Label>
             <Form.Control
               onChange={handleinput}
               required
@@ -119,13 +133,13 @@ export default function SignUp() {
               onKeyUp={(e) => {
                 return onlyNumberKey(e);
               }}
-              placeholder="9123456780"
+              placeholder="912XXXXXXX"
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
 
           <div id="select" className="formInput">
-            <p className="p login-h2"> Enter Role </p>
+            <p className="p login-h2" required> Enter Role </p>
             <select name="role" onChange={handleinput} form="signupform">
               <option value="None" defaultValue></option>
               <option value="user">User</option>
@@ -134,7 +148,7 @@ export default function SignUp() {
           </div>
         </div>
         <Form.Group className="formInput">
-          <Form.Label className="p"> Enter Address </Form.Label>
+          <Form.Label htmlFor='address' className="p" required> Enter Address </Form.Label>
           <Form.Control
             onChange={handleinput}
             required
@@ -145,23 +159,23 @@ export default function SignUp() {
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
         <small className="sm-p">Select none if you are an user</small>
-        <Form.Select onChange={handleinput} aria-label="Default select example">
+        <Form.Select required name='service' onChange={handleinput} aria-label="Default select example">
           <option>none</option>
           {data &&
             data.map((e) => {
-              return <option value={e}>{e}</option>;
+              return <option key={e} value={e}>{e}</option>;
             })}
         </Form.Select>
         <div id="auth-btn">
-          <button onClick={signupHandler}>Sign Up</button>
+          <button type="submit" onClick={signupHandler}>Sign Up</button>
         </div>
       </form>
 
-      <div>
+      <div id="signup-div">
         <h1> </h1>
-        <p className="sm-p" style={{ display: "inline-block" }}>
+        <span className="sm-p" style={{ display: "inline-block" }}>
           Already have a account?
-        </p>{" "}
+        </span>{" "}
         <Link to="/auth/login">Login?</Link>
       </div>
     </div>

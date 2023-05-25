@@ -105,12 +105,14 @@ textarea{
 }
 .Cont-about-us h2
 {
+    overflow: hidden;
     font-size: 45px;
     margin-bottom: 20px;
     color: #333;
 }
 .Cont-about-us h3
 {
+    overflow: hidden;
     font-size: 22px;
     color: #888;
     margin-bottom: 8px;
@@ -147,3 +149,32 @@ textarea{
     transform: translateY(-2px);
 }
 
+@media screen and(max-width:1024px) {
+    .Cont-about-us p
+    {
+        width: 100%;
+        text-align: justify;
+        font-size: 15px;
+    }
+}
+@media screen and (max-width:768px) {
+    .Cont-flex
+    {
+        flex: 0 0 100%;
+        max-width: 0 0 100%;
+        padding: 0 20px;
+        margin: 2%;   
+    }
+    .Cont-flex h2{
+        text-align: center;
+    }
+    .cont-flex-img{
+        display: none;
+    }
+    .Cont-about-us p
+    {
+        width: 100%;
+        text-align: justify;
+        font-size: 10px;
+    }
+}

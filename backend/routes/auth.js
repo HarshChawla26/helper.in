@@ -26,11 +26,9 @@ router.post('/signup',async (req,res)=>{
         // if(user) return res.json({msg:'user already registered'});
 
         const emailString = '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
-        // console.log(user)
         const secpwd = await bcrypt.hash(pwd,10);
         // if(!email.match(emailString)) return res.json({msg:'invalid credentials'});
         if(role==='technician'){
-            console.log(service)
             const serviceObj = await serviceDB.findOne({name:service})
             const newUser = new userDB({
                 name,
@@ -124,6 +122,7 @@ router.post('/:_id/addServices',async(req,res)=>{
 //Purchase API
 router.patch('/:id/purchase',async(req,res)=>{
     const {id} = req.params;
+    try{
     const user = await userDB.findOne({_id:id});
     if(user){
         let arr = user.services;
@@ -138,18 +137,23 @@ router.patch('/:id/purchase',async(req,res)=>{
             e.status = 'Booked'
             arr.push(e)
         })
-        arr.map(async(e)=>{
-            const service = await serviceDB.findOne({name:e.name})
-            if(service){
-                // console.log(service.execID)
-                const serviceMan = await userDB.findOne({_id:service.execID})
-                serviceMan.services = arr;
-                serviceMan.save()
-            }
-        })
+        // await arr.map(async(e)=>{
+        //     const service = await serviceDB.findOne({name:e.name})
+        //     // return res.send(service)
+        //     if(service){
+        //         const serviceMan = await userDB.findOne({_id:service.execID})
+        //         serviceMan.services = arr;
+        //         serviceMan.save()
+        //     }
+        // })
         user.services = arr;
         user.cart = [];
         user.save()
+    }}catch(err){
+        console.log(err);
+        return res.send({
+            err
+        });
     }
     res.send({msg:'purchase done'})
 })

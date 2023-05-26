@@ -79,6 +79,8 @@ export default function Services() {
                   <td>{e.status}</td>
                 </tr>
               </table>
+              {
+                (sessionStorage.getItem('userType')!=='technician')?
               <button
                 onClick={() => {
                   cancelOrder(e.id);
@@ -88,6 +90,8 @@ export default function Services() {
                 {" "}
                 Cancel{" "}
               </button>
+                :<></>
+              }
             </div>
           </div>
         );

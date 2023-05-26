@@ -43,6 +43,10 @@ form select{
     font-size: 15px;
     border: 2px solid rgb(255, 191, 0);
 }
+#select{
+    width:100%;
+    margin-top:7%;
+}
 form div{
     position: relative;
     flex-wrap: wrap;

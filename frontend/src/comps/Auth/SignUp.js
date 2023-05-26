@@ -121,7 +121,7 @@ export default function SignUp() {
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
-        <div>
+        <div >
           <Form.Group className="formInput">
             <Form.Label className="p" required> Enter Phone Number </Form.Label>
             <Form.Control

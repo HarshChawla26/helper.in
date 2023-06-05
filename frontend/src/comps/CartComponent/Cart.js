@@ -22,7 +22,7 @@ function Cart() {
   }
   async function getCartData() {
     const response = await fetch(
-      `http://localhost:4000/auth/${sessionStorage.getItem("userID")}/cart`
+      `${process.env.REACT_APP_BASE_URL}auth/${sessionStorage.getItem("userID")}/cart`
     );
     const respData = await response.json();
     await setcart(respData.cart);
@@ -55,7 +55,7 @@ function Cart() {
   }, []);
 
   // async function getServicesData(id){
-  //     const response = await fetch(`http://localhost:4000/services/${id}`)
+  //     const response = await fetch(`${process.env.REACT_APP_BASE_URL}services/${id}`)
   //     const respData = await response.json()
   //     return respData.service
   // }

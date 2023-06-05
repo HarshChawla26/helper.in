@@ -27,7 +27,7 @@ export default function Navbar()
 
   useEffect(() => {
     async function getCartCount(){
-        const response = await fetch(`http://localhost:4000/auth/${sessionStorage.getItem('userID')}/cart`);
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}auth/${sessionStorage.getItem('userID')}/cart`);
         const respData = await response.json();
         await setCartCount(respData.cart.length)      
 

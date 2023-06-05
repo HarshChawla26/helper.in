@@ -17,7 +17,7 @@ const AuthState = (props)=>{
 
     // Function to Login the user with the provided form data
     async function userLogin(data){
-        const resp = await fetch('http://localhost:4000/auth/login',{
+        const resp = await fetch(`${process.env.REACT_APP_BASE_URL}auth/login`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -58,7 +58,7 @@ const AuthState = (props)=>{
     }
     // Function to create a new user with the provided form data
     async function userSignup(data){
-        const resp = await fetch('http://localhost:4000/auth/signup',{
+        const resp = await fetch(`${process.env.REACT_APP_BASE_URL}auth/signup`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -86,7 +86,7 @@ const AuthState = (props)=>{
     }
 
     async function deleteAccount(id){
-        const resp = await fetch(`http://localhost:4000/auth/${id}/delete`,{
+        const resp = await fetch(`${process.env.REACT_APP_BASE_URL}auth/${id}/delete`,{
             method:'DELETE'
         })
         await resp.json()

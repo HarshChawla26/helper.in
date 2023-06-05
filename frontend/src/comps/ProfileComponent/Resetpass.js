@@ -14,7 +14,7 @@ export default function Resetpass(props) {
   }
   async function handlePassChange(e){
     e.preventDefault()
-    const response = await fetch(`http://localhost:4000/auth/${sessionStorage.getItem('userID')}/changepwd`,{
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}auth/${sessionStorage.getItem('userID')}/changepwd`,{
       method:'PATCH',
       headers:{
         'Content-Type':'application/json'

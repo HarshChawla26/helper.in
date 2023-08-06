@@ -17,7 +17,7 @@ export default function EditData(props) {
 
   async function handleupdate(e){
     e.preventDefault()
-    const resp = await fetch(`http://localhost:4000/auth/${sessionStorage.getItem('userID')}/editinfo`,{
+    const resp = await fetch(`${process.env.REACT_APP_BASE_URL}auth/${sessionStorage.getItem('userID')}/editinfo`,{
       method:'PATCH',
       headers:{
         'Content-Type':'application/json'

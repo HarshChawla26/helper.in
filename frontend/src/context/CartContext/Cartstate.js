@@ -4,21 +4,21 @@ export const CartState = (props)=>{
     const [cart, setcart] = useState([])
 
     async function deleteFromCart(user,servId){
-        const reponse = await fetch(`http://localhost:4000/auth/${user}/cart/${servId}`,{
+        const reponse = await fetch(`${process.env.REACT_APP_BASE_URL}auth/${user}/cart/${servId}`,{
             method:'DELETE'
         })
         await reponse.json()
     }
     
     async function purchase(id){
-        const resp = await fetch(`http://localhost:4000/auth/${id}/purchase`,{
+        const resp = await fetch(`${process.env.REACT_APP_BASE_URL}auth/${id}/purchase`,{
             method:'PATCH'
         })
         await resp.json()
     }
 
     const addtocart = async(userID,data)=>{
-        const response = await fetch(`http://localhost:4000/auth/${userID}/addtocart`,{
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}auth/${userID}/addtocart`,{
             method:'POST',
             headers:{
                 "Content-Type":'application/json'

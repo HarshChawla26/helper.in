@@ -1,10 +1,11 @@
 
 #service{
-  padding: 20px 5px;
+  padding: 30px 5px;
+  /* background-color: #575a7b; */
 }
 
 .sectionheading{
-  padding: 0 10px 10px 0;
+  padding: 0 10px 10px 0px;
 }
 
 .sectionheading > h2{
@@ -24,17 +25,45 @@ section > div {
   padding: 0 1em 1em 1em;
   text-align: center;
 }
+.serc-img-00{
+  margin: 3%;
+  min-width: 100px;
+  max-width: 300px;
+  transition: transform 2s cubic-bezier(0.4, 0.3, 0.2, 0.1);
+  will-change: transform;
+}
+.serc-img-01,.serc-img-02,.serc-img-03,.serc-img-04{
+  transition:all 0.2s ease-in;
+}
+.serc-img-01:hover{
+  transform: scale(1.15);
+}
+.serc-img-02:hover{
+  transform: scale(1.15);
+}
+.serc-img-03:hover{
+  transform: scale(1.15);
+}
+.serc-img-04:hover{
+  transform: scale(1.15);
+}
+.src-cards-4{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  z-index: 2;
+}
 .card {
-  width: 100%;
-  padding: 10px;
+  width: 86%;
+  padding: 20px;
   box-sizing: border-box;
-  background: linear-gradient(#ffffff 50%, #2c7bfe 50%);
+  background: linear-gradient(#ffffff 50%, #a9c616 50%);
   background-size: 100% 200%;
-  background-position: 0 2.5%;
+  background-position: 0 2%;
   border-radius: 4px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.12);
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.8s;
 }
 h3 {
   font-size: 20px;
@@ -56,4 +85,15 @@ p {
 }
 .card:hover p {
   color: #f0f0f0;
+}
+
+@media screen and (max-width:425px) {
+  
+.serc-img-00{
+  margin: 3%;
+  width: 350px;
+  /* max-width: 300px; */
+  transition: transform 2s cubic-bezier(0.4, 0.3, 0.2, 0.1);
+  will-change: transform;
+}
 }

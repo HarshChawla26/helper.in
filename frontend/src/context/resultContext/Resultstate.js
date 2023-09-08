@@ -5,14 +5,13 @@ const ResultState = (props)=>{
     const [cities, setcities] = useState([])
 
     async function fetchcities(){
-        const response = await fetch('http://localhost:4000/services/allcities');
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}services/allcities`);
         const respData = await response.json();
         setcities(respData)
-        sessionStorage.setItem('cities',respData)
     }
 
     async function fetchData(city){
-        const response = await fetch(`http://localhost:4000/services/city?city=${city}`);
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}services/city?city=${city}`);
         const respData = await response.json();
         setdata(respData)
         sessionStorage.setItem('location',city)

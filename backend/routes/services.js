@@ -6,6 +6,23 @@ const router = express.Router();
 // router.get('/',(req,res)=>{
 //     res.json('service API')
 // })
+
+router.get('/allservices',async (req,res)=>{
+    try{
+
+        let list = await serviceDB.find()
+        let arr = []
+        list.map((obj)=>{
+            // console.log(obj.name)
+            arr.push(obj.name);
+        })
+        res.send({msg:"Services recieved",arr})
+    }catch(err){
+        console.log(err)
+        res.json({msg:'something went wrong'})
+    }
+})
+
 router.get('/allcities',async (req,res)=>{
     let list = await serviceDB.find()
     let arr = []

@@ -2,12 +2,13 @@
     width:100%;
     min-height:50vh;
     padding-top:2%;
-    background-color:lightgray;
+    background-color:#222831;
 }
 .wrapper label{
     margin-left: 10%;
     font-family: Poppins;
     font-size: 20px;
+    color: aliceblue;
 }
 .wrapper #search{
     margin-bottom:4%;
@@ -16,8 +17,10 @@
 }
 .BOX{
     display: flex;
-    
+    min-height: 600px;
     flex-wrap: wrap !important;
+    justify-content: flex-start;
+    align-items:flex-start;
 }
 #nothing{
     margin: auto 10% ;
@@ -26,4 +29,10 @@
 }
 Button{
     width:10%;
+}
+@media screen and (max-width:425px) {
+    Button{
+        width:20%;
+    }
+    
 }

@@ -8,43 +8,72 @@ import { Navigate, Route, Routes } from "react-router";
 import Results from "./comps/ResultsComponent/Results";
 import Auth from "./comps/Auth/Auth";
 import { ToastContainer } from "react-toastify";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import resultcontext from "./context/resultContext/resultcontext";
 import Cart from "./comps/CartComponent/Cart";
-import cartContext from "./context/CartContext/cartContext";
+import AuthContext from "./context/AuthContext/authContext";
 
 function App() {
-  const cart = useContext(cartContext)
+  const user = useContext(AuthContext);
+  const [isTech, setisTech] = useState(sessionStorage.getItem('userType'))
+  
+  useEffect(() => {
+    if(sessionStorage.getItem('userType')&&sessionStorage.getItem('userType')==='technician'){
+      setisTech(true)
+    }else{
+      setisTech(false)
+    }
+  }, [])
+  
   const result = useContext(resultcontext);
   useEffect(() => {
     result.fetchcities()
      // eslint-disable-next-line
   }, [sessionStorage.getItem('cities')])
   
-  useEffect(() => {
-    cart.setcart(JSON.parse(sessionStorage.getItem('cart')))
-    // eslint-disable-next-line
-}, [sessionStorage.getItem('cart')])
-
+  if(sessionStorage.getItem('userType')&&sessionStorage.getItem('userType')==='technician'){
+    return (
+      <>
+        <Navbar />
+        <Routes>
+            <>
+            <Route
+              path="/profile/*"
+              element={<Profile />}/>            
+            <Route path="*" element={<Navigate to="/profile/*" />} />
+          </>
+        </Routes>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+        {/* <Contacts /> */}
+      </>
+    );
+  }
   return (
     <>
       <Navbar />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Home />
-              <Service />
-              <Contacts />
-            </>
-          }
-        />
-        <Route path='/results' element={<><Results/><Contacts /></>}></Route>
-        <Route path="/auth/*" element={<Auth />} />
-        <Route path='/profile' element={<Profile/>}/>
-        <Route path='/cart' element={<Cart/>}/>
-        <Route path="*" element={<Navigate to="/" />} />
+          <>
+          <Route
+            path="/"
+            element={<><Home /><Service /><Contacts /></>}/>
+          <Route path='/results' element={<><Results/><Contacts /></>}></Route>
+          <Route path="/auth/*" element={<Auth />} />
+          <Route path='/profile/*' element={<Profile/>}/>
+          <Route path='/cart' element={<Cart/>}/>
+          
+          <Route path="*" element={<Navigate to="/" />} />
+        </>
       </Routes>
       <ToastContainer
         position="bottom-right"

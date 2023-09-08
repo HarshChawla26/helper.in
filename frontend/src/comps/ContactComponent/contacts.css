@@ -1,13 +1,12 @@
-
+/* 
 .container1 {
     color: #fff;
     width: 100%;
-    /* max-width: 1000px; */
-    /* margin: 50px auto; */
+    
     background-color: rgb(50, 50, 50);
-    /* border-radius: 10px; */
+    
     box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.2);
-    /* padding: auto; */
+    
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -36,15 +35,7 @@ textarea{
    ; border: 1px solid gray;
     padding: 10px;
 }
-/* .form input[type="text"], .form input[type="email"], .form textarea {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    background-color: white;
-    font-size: 16px;
-} */
+
 
 .form textarea {
     height: 150px;
@@ -88,4 +79,102 @@ textarea{
 .contact-info i {
     font-size: 24px;
     margin-right: 10px;
+} */
+.Cont-about-us
+{
+    padding: 80px 0px;
+
+}
+.Cont-container
+{
+    max-width: 1200px;
+    margin:0 auto;
+    padding: 0 20px;
+
+}
+.Cont-row
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+.Cont-flex
+{
+    flex: 0 0 50%;
+    max-width: 0 0 50%;
+    padding: 0 20px;
+}
+.Cont-about-us h2
+{
+    overflow: hidden;
+    font-size: 45px;
+    margin-bottom: 20px;
+    color: #333;
+}
+.Cont-about-us h3
+{
+    overflow: hidden;
+    font-size: 22px;
+    color: #888;
+    margin-bottom: 8px;
+}
+.Cont-about-us p
+{
+    font-size: 18px;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom:20px;
+}
+.Cont-about-us img
+{
+    display: block;
+    max-width: 60%;
+    height: auto;
+    margin: 0 auto;
+}
+.Cont-btn
+{
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+    background-color: #333;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: all 0.4s ease;
+}
+.Cont-btn:hover{
+    transform: translateY(-2px);
+}
+
+@media screen and(max-width:1024px) {
+    .Cont-about-us p
+    {
+        width: 100%;
+        text-align: justify;
+        font-size: 15px;
+    }
+}
+@media screen and (max-width:768px) {
+    .Cont-flex
+    {
+        flex: 0 0 100%;
+        max-width: 0 0 100%;
+        padding: 0 20px;
+        margin: 2%;   
+    }
+    .Cont-flex h2{
+        text-align: center;
+    }
+    .cont-flex-img{
+        display: none;
+    }
+    .Cont-about-us p
+    {
+        width: 100%;
+        text-align: justify;
+        font-size: 10px;
+    }
 }

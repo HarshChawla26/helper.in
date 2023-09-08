@@ -24,36 +24,19 @@ export default function Login() {
   async function handleLogin(e) {
     e.preventDefault();
     await userState.userLogin(formData);
-    
-    toast.success("Login successfull!", {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-
-    await navigator("/");
   }
-  // useEffect(() => {
-  //   console.log(formData)
-  // }, [formData])
-
   return (
     <>
       <div className="login-container">
         <div>
-          <h2> Welcome to Our Application </h2>
+          <h2 className="login-h2"> Welcome to Our Application </h2>
           <p> Please login to use the platform </p>
         </div>
 
         <form id="loginform">
 
           <Form.Group className="formInput">
-            <Form.Label className="p">Enter Email</Form.Label>
+            <Form.Label className="p"  required>Enter Email</Form.Label>
             <Form.Control
               onChange={handleinput}
               required
@@ -64,7 +47,7 @@ export default function Login() {
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
           <Form.Group className="formInput">
-            <Form.Label className="p"> Enter Password </Form.Label>
+            <Form.Label className="p" required> Enter Password </Form.Label>
             <Form.Control
               onChange={handleinput}
               required

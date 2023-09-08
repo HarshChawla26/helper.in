@@ -21,6 +21,7 @@ export default function Home() {
     e.preventDefault()
     if(sessionStorage.getItem('userID')&&sessionStorage.getItem('userID')!==''){
       result.fetchData(search);
+      sessionStorage.setItem('location',search)
       navigate(`/results?city=${search}`)
     }else{
       navigate('/auth')
@@ -32,19 +33,19 @@ export default function Home() {
   
   return (
     <div>
-
       <div className="mycontainer">
-          <h1>NAMASTE</h1>
+        <center>
+          <h1 id='namaste-h1'>NAMASTE</h1>
           <p>Services, on demand</p>
-      
-      <form >
-        <select id="search" onChange={handleinput}>
-          <option value='' defaultValue> </option>
+        </center>
+      <form>
+        <select id="search"  onChange={handleinput}>
+          <option value='' defaultValue> Search for city </option>
           {result.cities.map((e,index)=>{
             return <option key={index} value={e}>{e}</option>
           })}
         </select>
-        <Button onClick={handlesearch} variant={'dark'} className='button'>Search</Button>
+        <Button onClick={handlesearch} variant={'dark'} id='home-search-button'>Search</Button>
       </form>
       </div>
     </div>

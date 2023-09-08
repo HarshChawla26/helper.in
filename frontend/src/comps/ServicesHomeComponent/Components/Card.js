@@ -1,17 +1,9 @@
 import React from "react";
-
-export default function Card() {
+import './../service.css'
+export default function Card(props) {
   return (
-    <div className="row">
-      <div className="column">
-        <div className="card">
-          <h3>Service heading</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-        </div>
-      </div>
+    <div className="row serc-img-00">
+      <img className={props.classs} src={props.imgsrc} alt="services"></img>
     </div>
   );
 }

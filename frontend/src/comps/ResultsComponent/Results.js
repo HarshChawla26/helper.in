@@ -22,6 +22,12 @@ export default function Results() {
         // eslint-disable-next-line
     }, [sessionStorage.getItem('location')])
 
+
+    // useEffect(() => {
+    //     if(!sessionStorage.getItem('location')){
+    //         sessionStorage   
+    //     }
+    // }, [])
     
     
     useEffect(() => {
@@ -55,31 +61,31 @@ export default function Results() {
       }
     
     useEffect(()=>{
-        if(result.data.length===0){
+        if(result.data&&result.data.length===0){
             if(sessionStorage.getItem('data')){ setpayload(JSON.parse(sessionStorage.getItem('data')))}
             setshow(true)
         }else{
             setshow(false)
-            setpayload(result.data)
+            setpayload(result.data)     
         }
         // eslint-disable-next-line
-    }, [result.data,sessionStorage.getItem('data')])
+    }, [result.data])
     
     
     if(show){
         return(
             <div className='wrapper'>
                 <label>City :</label>
-        <select id="search" onChange={handleinput} ref={loc}>
-          <option value=''> </option>
-          {result.cities.map((e,index)=>{
-            if(sessionStorage.getItem('location').toLowerCase()===e.toLowerCase()){
-                return <option key={index} value={e} selected>{e}</option>
-            }
-            return <option key={index} value={e}>{e}</option>
-          })}
-        </select>
-        <Button variant="secondary" onClick={handlesearch}>Search</Button>
+                <select id="search" onChange={handleinput} ref={loc}>
+                    <option value=''> </option>
+                    {result.cities.map((e,index)=>{
+                        if(sessionStorage.getItem('location')&&sessionStorage.getItem('location').toLowerCase()===e.toLowerCase()){
+                            return <option key={index} value={e} selected>{e}</option>
+                        }
+                        return <option key={index} value={e}>{e}</option>
+                    })}
+                </select>
+                <Button variant="secondary" onClick={handlesearch}>Search</Button>
                 <div className="BOX">
                     <div id='nothing'>No Results</div>
                 </div>
@@ -91,7 +97,7 @@ export default function Results() {
         <label>City :</label>
         <select id="search" onChange={handleinput} ref={loc}>
           <option value=''> </option>
-          {result.cities.map((e,index)=>{
+          {result.cities&&result.cities.map((e,index)=>{
             if(sessionStorage.getItem('location').toLowerCase()===e.toLowerCase()){
                 return <option key={index} value={e} selected>{e}</option>
             }
@@ -103,7 +109,7 @@ export default function Results() {
             
             {payload&&
                 payload.map(e=>{
-                    return <ResultCard key={e._id} id={e._id} name={e.name} desc={e.description} price={e.price} source={'/'} />
+                    return <ResultCard img={e.img} key={e._id} id={e._id} name={e.name} desc={e.description} price={e.price} source={'/'} />
                 })
             }
         </div>

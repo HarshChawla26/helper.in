@@ -17,6 +17,10 @@ function getTimeSlot(){
     return Math.floor(Math.random()*9)+9;
 }
 
+async function f(){
+    
+}
+
 //Signing up
 router.post('/signup',async (req,res)=>{
     const {name,email,pwd,phone,address,role,service} = req.body;
@@ -26,11 +30,9 @@ router.post('/signup',async (req,res)=>{
         // if(user) return res.json({msg:'user already registered'});
 
         const emailString = '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
-        // console.log(user)
         const secpwd = await bcrypt.hash(pwd,10);
         // if(!email.match(emailString)) return res.json({msg:'invalid credentials'});
         if(role==='technician'){
-            console.log(service)
             const serviceObj = await serviceDB.findOne({name:service})
             const newUser = new userDB({
                 name,
@@ -124,10 +126,15 @@ router.post('/:_id/addServices',async(req,res)=>{
 //Purchase API
 router.patch('/:id/purchase',async(req,res)=>{
     const {id} = req.params;
+    try{
+        //finding user from to to place order
     const user = await userDB.findOne({_id:id});
     if(user){
+
+        //getting services array
         let arr = user.services;
-        // let d = date.getDate()+3;
+
+        // Traversing cart and adding essential info and adding to array
         user.cart.map(async(e,index)=>{
             let date = new Date()
             date.setDate(date.getDate()+getSlot())
@@ -136,22 +143,30 @@ router.patch('/:id/purchase',async(req,res)=>{
             e.date = date.toDateString();
             e.time = `${date.getHours()}:00 ${(date.getHours()<12)?'AM':'PM'}`
             e.status = 'Booked'
+            e.user = id;
             arr.push(e)
         })
-        arr.map(async(e)=>{
+        //traversing array then for every service searching the services in serviceDB getting service
+        await arr.map(async (e)=>{
             const service = await serviceDB.findOne({name:e.name})
+            // return res.send(service)
             if(service){
-                // console.log(service.execID)
                 const serviceMan = await userDB.findOne({_id:service.execID})
                 serviceMan.services = arr;
                 serviceMan.save()
             }
         })
+        
+        // These save changes in user profile permanently
+
         user.services = arr;
         user.cart = [];
         user.save()
+        res.json({msg:'purchase done'})
+    }}catch(err){
+        console.log(err);
+        return res.send({err});
     }
-    res.send({msg:'purchase done'})
 })
 
 // Login API
@@ -205,7 +220,14 @@ router.get('/:_id/services',async (req,res)=>{
 router.delete('/:_id/service/:serId',async (req,res)=>{
     const {_id,serId} = req.params;
     try {
-        
+        const service = await serviceDB.findOne({_id:serId});
+        const servMan  = await userDB.findOne({_id:service.execID})
+        if(servMan){
+            let arr = servMan.services;
+            arr.filter(async()=>{
+                
+            })
+        }
         const user = await userDB.findOne({_id},{services:1});
         if(user){
         let arr = await user.services;

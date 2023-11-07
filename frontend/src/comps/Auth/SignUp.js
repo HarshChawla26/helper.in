@@ -17,7 +17,7 @@ export default function SignUp() {
 
   useEffect(() => {
     async function getServices(){
-      const response = await fetch(`http://localhost:4000/services/allservices`);
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}services/allservices`);
       const resp = await response.json();
       if(resp.msg==='Services recieved'){
         await setdata(resp.arr)
@@ -121,7 +121,7 @@ export default function SignUp() {
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
-        <div>
+        <div >
           <Form.Group className="formInput">
             <Form.Label className="p" required> Enter Phone Number </Form.Label>
             <Form.Control

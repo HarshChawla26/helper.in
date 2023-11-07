@@ -14,7 +14,7 @@ export default function Profile() {
     useEffect(() => {
         // console.log(sessionStorage.getItem('userID').toString())
         async function getuser(){
-            const response = await fetch(`http://localhost:4000/auth/${sessionStorage.getItem('userID')}`)
+            const response = await fetch(`${process.env.REACT_APP_BASE_URL}auth/${sessionStorage.getItem('userID')}`)
             const respData = await response.json();
             setdata(respData)
         }
